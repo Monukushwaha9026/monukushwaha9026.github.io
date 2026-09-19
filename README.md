@@ -10,7 +10,7 @@ Welcome to the source repository for my personal developer portfolio hosted dire
 - **GetNow**: [Live Demo](https://monukushwaha9026.github.io/GetNow/) • [Source](https://github.com/Monukushwaha9026/GetNow)
 - **PeerDrop**: [Live Demo](https://peerdrop-y6w5.onrender.com/) • [Source](https://github.com/Monukushwaha9026/PeerDrop)
 - **Student ID Manager**: [Source](https://github.com/Monukushwaha9026/Student_id_manager)
-- **LexiconGarden**: [Source](https://github.com/Monukushwaha9026/Lexicongarden)
+- **LexiconGarden**: [Live Demo](https://lexicongarden.onrender.com/) • [Source](https://github.com/Monukushwaha9026/Lexicongarden)
 
 ---
 
