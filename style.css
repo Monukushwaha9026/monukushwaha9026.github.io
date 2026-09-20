@@ -232,7 +232,7 @@ body {
    ============================================================ */
 .content-area {
   flex: 1;
-  padding: 3.5rem 3.5rem 5rem;
+  padding: 0 3.5rem 5rem;
   max-width: 880px;
 }
 
@@ -251,9 +251,15 @@ body {
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* Section Header Typography */
+/* Section Header Typography - Sticky Hard */
 .section-title-wrap {
-  margin-bottom: 2.25rem;
+  position: sticky;
+  top: var(--mobile-sidebar-height, 0px);
+  z-index: 40;
+  background-color: var(--bg-page);
+  padding: 2.25rem 0 1.25rem;
+  margin-bottom: 2rem;
+  border-bottom: 1px solid var(--border-light);
 }
 
 .minimal-pill {
@@ -721,7 +727,12 @@ body {
   }
 
   .content-area {
-    padding: 2rem 1.5rem 4rem;
+    padding: 0 1.5rem 4rem;
+  }
+
+  .section-title-wrap {
+    padding: 1.5rem 0 1rem;
+    margin-bottom: 1.5rem;
   }
 
   .display-title {

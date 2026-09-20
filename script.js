@@ -36,10 +36,10 @@ document.addEventListener('DOMContentLoaded', () => {
     // Update window hash without jump
     history.replaceState(null, null, `#${tabId}`);
 
-    // Scroll to top of content area on mobile
-    if (window.innerWidth <= 960) {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
+    // Always start immediately from the top on desktop and mobile
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
   }
 
   // Bind click on sidebar nav items
@@ -61,4 +61,19 @@ document.addEventListener('DOMContentLoaded', () => {
   if (initialHash && validTabs.includes(initialHash)) {
     activateTab(initialHash);
   }
+
+  // 4. Dynamic Sticky Title Offset for Mobile
+  function updateStickyOffset() {
+    if (window.innerWidth <= 960) {
+      const sidebar = document.querySelector('.sidebar');
+      if (sidebar) {
+        document.documentElement.style.setProperty('--mobile-sidebar-height', `${sidebar.offsetHeight}px`);
+      }
+    } else {
+      document.documentElement.style.setProperty('--mobile-sidebar-height', '0px');
+    }
+  }
+
+  updateStickyOffset();
+  window.addEventListener('resize', updateStickyOffset);
 });
