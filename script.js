@@ -1,74 +1,64 @@
 /**
- * Monu Kushwaha Portfolio Scripts
+ * Minimal Portfolio Interaction Scripts
+ * Left Sidebar Navigation & Dynamic Tab Switching
  */
 
 document.addEventListener('DOMContentLoaded', () => {
-  // 1. Dynamic Year
-  const yearEl = document.getElementById('currentYear');
-  if (yearEl) {
-    yearEl.textContent = new Date().getFullYear();
+  // 1. Dynamic Footer Year
+  const yearSpan = document.getElementById('yearSpan');
+  if (yearSpan) {
+    yearSpan.textContent = new Date().getFullYear();
   }
 
-  // 2. Mobile Menu Toggle
-  const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-  const navLinks = document.querySelector('.nav-links');
+  // 2. Tab Navigation
+  const navItems = document.querySelectorAll('.nav-item');
+  const tabPanes = document.querySelectorAll('.tab-pane');
 
-  if (mobileMenuBtn && navLinks) {
-    mobileMenuBtn.addEventListener('click', () => {
-      navLinks.classList.toggle('active');
-    });
-
-    // Close menu when clicking a link
-    navLinks.querySelectorAll('a').forEach(link => {
-      link.addEventListener('click', () => {
-        navLinks.classList.remove('active');
-      });
-    });
-  }
-
-  // 3. Copy Email Handler
-  const copyEmailBtn = document.getElementById('copyEmailBtn');
-  const emailVal = document.getElementById('emailVal');
-  const toast = document.getElementById('toast');
-
-  if (copyEmailBtn && emailVal) {
-    copyEmailBtn.addEventListener('click', async () => {
-      const email = emailVal.textContent.trim();
-      try {
-        await navigator.clipboard.writeText(email);
-        showToast('Email copied to clipboard!');
-        copyEmailBtn.textContent = 'Copied!';
-        setTimeout(() => {
-          copyEmailBtn.textContent = 'Copy';
-        }, 2000);
-      } catch (err) {
-        showToast('Could not copy email automatically.');
+  function activateTab(tabId) {
+    // Update nav buttons
+    navItems.forEach(item => {
+      if (item.dataset.tab === tabId) {
+        item.classList.add('active');
+      } else {
+        item.classList.remove('active');
       }
     });
-  }
 
-  function showToast(message) {
-    if (!toast) return;
-    toast.textContent = message;
-    toast.classList.remove('hidden');
-    setTimeout(() => {
-      toast.classList.add('hidden');
-    }, 2500);
-  }
-
-  // 4. Smooth Anchor Scrolling
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function(e) {
-      const targetId = this.getAttribute('href');
-      if (targetId === '#') return;
-      const targetElement = document.querySelector(targetId);
-      if (targetElement) {
-        e.preventDefault();
-        targetElement.scrollIntoView({
-          behavior: 'smooth',
-          block: 'start'
-        });
+    // Update tab panes
+    tabPanes.forEach(pane => {
+      if (pane.id === `section-${tabId}`) {
+        pane.classList.add('active');
+      } else {
+        pane.classList.remove('active');
       }
+    });
+
+    // Update window hash without jump
+    history.replaceState(null, null, `#${tabId}`);
+
+    // Scroll to top of content area on mobile
+    if (window.innerWidth <= 960) {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  }
+
+  // Bind click on sidebar nav items
+  navItems.forEach(item => {
+    item.addEventListener('click', () => {
+      const tabId = item.dataset.tab;
+      activateTab(tabId);
     });
   });
+
+  // Global helper for in-page links (e.g., "View All Projects →")
+  window.switchTab = function(tabId) {
+    activateTab(tabId);
+  };
+
+  // 3. Handle Initial Hash on Load
+  const initialHash = window.location.hash.replace('#', '');
+  const validTabs = ['profile', 'projects', 'skills', 'learning'];
+  if (initialHash && validTabs.includes(initialHash)) {
+    activateTab(initialHash);
+  }
 });

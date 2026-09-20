@@ -3,391 +3,543 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Monu Kushwaha — Developer Portfolio</title>
-  <meta name="description" content="Personal portfolio of Monu Kushwaha - Web Developer & Creator building fast, minimal, and user-centric applications." />
-  
-  <!-- Open Graph / Meta -->
-  <meta property="og:title" content="Monu Kushwaha — Developer Portfolio" />
-  <meta property="og:description" content="Web developer crafting lightweight web apps, utilities, and open-source tools." />
-  <meta property="og:image" content="https://avatars.githubusercontent.com/u/245680805?v=4" />
-  <meta property="og:type" content="website" />
+  <title>Monu Kushwaha — Minimalist Portfolio</title>
+  <meta name="description" content="Personal portfolio of Monu Kushwaha. Software Developer & Web Creator." />
 
-  <!-- Fonts & Icons -->
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <!-- Ambient Glow Effects -->
-  <div class="glow-orb orb-1"></div>
-  <div class="glow-orb orb-2"></div>
-
-  <!-- Navigation Bar -->
-  <header class="navbar">
-    <div class="nav-container">
-      <a href="#" class="nav-logo">
-        <span class="logo-bracket">&lt;</span>MK <span class="logo-slash">/</span><span class="logo-bracket">&gt;</span>
-      </a>
-      
-      <nav class="nav-links">
-        <a href="#about">About</a>
-        <a href="#projects">Projects</a>
-        <a href="#skills">Skills</a>
-        <a href="#contact" class="nav-btn">Contact Me</a>
-      </nav>
-
-      <button id="mobileMenuBtn" class="mobile-toggle" aria-label="Toggle Menu">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
-    </div>
-  </header>
-
-  <main>
-    <!-- Hero Section -->
-    <section class="hero-section" id="hero">
-      <div class="hero-container">
-        <div class="hero-avatar-wrapper">
+  <div class="layout-wrapper">
+    <!-- LEFT SIDEBAR: Profile & Navigation -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="avatar-container">
           <img 
             src="https://avatars.githubusercontent.com/u/245680805?v=4" 
             alt="Monu Kushwaha" 
-            class="hero-avatar"
+            class="sidebar-avatar"
           />
-          <div class="status-indicator" title="Available for new opportunities">
-            <span class="pulse-dot"></span>
-            <span>Available for projects</span>
+        </div>
+        <div class="user-meta">
+          <h1 class="user-name">Monu Kushwaha</h1>
+          <p class="user-handle">@Monukushwaha9026</p>
+          <div class="status-pill">
+            <span class="status-dot"></span>
+            <span>Available for work</span>
           </div>
         </div>
+      </div>
 
-        <div class="hero-content">
-          <p class="hero-greeting">Hi there, I'm</p>
-          <h1 class="hero-name">Monu <span class="gradient-text">Kushwaha</span></h1>
-          <h2 class="hero-role">Web Developer &amp; Open Source Creator</h2>
-          <p class="hero-bio">
-            I build lightning-fast web applications, helpful developer tools, and clean digital experiences. Passionate about minimalism, frontend engineering, and building tools that make everyday tasks simpler.
+      <!-- Navigation Tabs -->
+      <nav class="sidebar-nav">
+        <button class="nav-item active" data-tab="profile">
+          <span class="nav-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+              <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+          </span>
+          <span class="nav-text">Profile</span>
+        </button>
+
+        <button class="nav-item" data-tab="projects">
+          <span class="nav-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+              <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+            </svg>
+          </span>
+          <span class="nav-text">My Projects</span>
+          <span class="nav-badge">4</span>
+        </button>
+
+        <button class="nav-item" data-tab="skills">
+          <span class="nav-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+            </svg>
+          </span>
+          <span class="nav-text">My Skills</span>
+        </button>
+
+        <button class="nav-item" data-tab="learning">
+          <span class="nav-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path>
+              <path d="M6 12v5c3 3 9 3 12 0v-5"></path>
+            </svg>
+          </span>
+          <span class="nav-text">My Learning</span>
+        </button>
+      </nav>
+
+      <!-- Sidebar Social Footer -->
+      <div class="sidebar-footer">
+        <p class="footer-label">Connect</p>
+        <div class="social-links-row">
+          <a href="https://github.com/Monukushwaha9026" target="_blank" rel="noopener noreferrer" class="social-btn" title="GitHub">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+            </svg>
+          </a>
+          <a href="https://www.linkedin.com/in/monukushwaha9026/" target="_blank" rel="noopener noreferrer" class="social-btn" title="LinkedIn">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+            </svg>
+          </a>
+          <a href="mailto:monukushwaha9026@gmail.com" class="social-btn" title="Email">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+              <polyline points="22,6 12,13 2,6"></polyline>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </aside>
+
+    <!-- RIGHT MAIN CONTENT AREA -->
+    <main class="content-area">
+      <!-- 1. PROFILE SECTION -->
+      <section id="section-profile" class="tab-pane active">
+        <header class="section-title-wrap">
+          <span class="minimal-pill">Overview</span>
+          <h2 class="display-title">Monu Kushwaha</h2>
+          <p class="subtitle">Software Developer &amp; Web Creator</p>
+        </header>
+
+        <!-- Social Handles & Quick Links -->
+        <div class="social-handles-pillbox">
+          <a href="https://github.com/Monukushwaha9026" target="_blank" rel="noopener noreferrer" class="pill-link">
+            <span class="pill-dot"></span> github.com/Monukushwaha9026 ↗
+          </a>
+          <a href="https://www.linkedin.com/in/monukushwaha9026/" target="_blank" rel="noopener noreferrer" class="pill-link">
+            <span class="pill-dot"></span> linkedin.com/in/monukushwaha9026 ↗
+          </a>
+          <a href="mailto:monukushwaha9026@gmail.com" class="pill-link">
+            <span class="pill-dot"></span> monukushwaha9026@gmail.com ↗
+          </a>
+        </div>
+
+        <!-- Summary -->
+        <div class="minimal-card summary-card">
+          <h3 class="card-title">Little Summary</h3>
+          <p class="summary-text">
+            I build clean, lightweight, and purposeful digital applications. Passionate about minimalism in design, high-performance web standards, and developer utilities that solve real-world problems with zero unnecessary fluff.
           </p>
-
-          <div class="hero-actions">
-            <a href="#projects" class="btn-primary">
-              <span>View Projects</span>
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <line x1="5" y1="12" x2="19" y2="12"></line>
-                <polyline points="12 5 19 12 12 19"></polyline>
-              </svg>
-            </a>
-            <a href="#contact" class="btn-secondary">Let's Connect</a>
-          </div>
-
-          <!-- Social Links -->
-          <div class="hero-socials">
-            <a href="https://github.com/Monukushwaha9026" target="_blank" rel="noopener noreferrer" class="social-icon" title="GitHub Profile">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
-              </svg>
-              <span>GitHub</span>
-            </a>
-
-            <a href="https://www.linkedin.com/in/monukushwaha9026/" target="_blank" rel="noopener noreferrer" class="social-icon" title="LinkedIn Profile">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
-              </svg>
-              <span>LinkedIn</span>
-            </a>
-
-            <a href="mailto:monukushwaha9026@gmail.com" class="social-icon" title="Email Monu">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-                <polyline points="22,6 12,13 2,6"></polyline>
-              </svg>
-              <span>Email</span>
-            </a>
+          <div class="summary-meta-grid">
+            <div class="meta-box">
+              <span class="meta-label">Focus</span>
+              <span class="meta-val">Web Engineering &amp; Client-Side Apps</span>
+            </div>
+            <div class="meta-box">
+              <span class="meta-label">Philosophy</span>
+              <span class="meta-val">Fast, Minimal, Functional</span>
+            </div>
+            <div class="meta-box">
+              <span class="meta-label">Location</span>
+              <span class="meta-val">India</span>
+            </div>
           </div>
         </div>
-      </div>
-    </section>
 
-    <!-- Quick Stats -->
-    <section class="stats-bar">
-      <div class="stat-item">
-        <span class="stat-num">5+</span>
-        <span class="stat-label">Open Source Repos</span>
-      </div>
-      <div class="stat-item">
-        <span class="stat-num">100%</span>
-        <span class="stat-label">Client-Side First</span>
-      </div>
-      <div class="stat-item">
-        <span class="stat-num">&lt; 1s</span>
-        <span class="stat-label">Average Load Speed</span>
-      </div>
-    </section>
+        <!-- 3 Recent Projects -->
+        <div class="recent-projects-block">
+          <div class="block-header">
+            <div>
+              <h3 class="block-title">Recent Projects</h3>
+              <p class="block-subtitle">3 recently developed applications and live tools</p>
+            </div>
+            <button class="pill-button see-all-btn" onclick="switchTab('projects')">
+              View All Projects →
+            </button>
+          </div>
 
-    <!-- Featured Projects -->
-    <section class="projects-section" id="projects">
-      <div class="section-header">
-        <span class="section-tag">Showcase</span>
-        <h2 class="section-title">Featured Projects</h2>
-        <p class="section-subtitle">Real-world applications and utilities built with modern web technologies.</p>
-      </div>
-
-      <div class="projects-grid">
-        <!-- Project 1: GetNow -->
-        <article class="project-card featured">
-          <div class="project-badge">⭐ Live on GitHub Pages</div>
-          <div class="project-content">
-            <div class="project-top">
-              <span class="project-emoji">⚡</span>
-              <div class="project-links">
-                <a href="https://monukushwaha9026.github.io/GetNow/" target="_blank" rel="noopener noreferrer" class="link-btn" title="Live Preview">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
-                </a>
-                <a href="https://github.com/Monukushwaha9026/GetNow" target="_blank" rel="noopener noreferrer" class="link-btn" title="Source Code">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
-                </a>
+          <div class="projects-list">
+            <!-- Recent 1: GetNow -->
+            <article class="minimal-project-card">
+              <div class="project-header">
+                <div>
+                  <h4 class="project-name">GetNow</h4>
+                  <p class="project-role">Pinterest Video &amp; Image Downloader</p>
+                </div>
+                <span class="pill-tag">Live on GitHub Pages</span>
               </div>
-            </div>
-            <h3 class="project-title">GetNow — Pinterest Media Downloader</h3>
-            <p class="project-desc">
-              A minimal and ultra-fast web tool that lets users paste any Pinterest link to instantly preview and download full HD videos (MP4) and uncompressed 4K original images. 100% client-side.
-            </p>
-            <div class="project-tech">
-              <span>JavaScript (ES6+)</span>
-              <span>HTML5 &amp; CSS3</span>
-              <span>GitHub Pages</span>
-              <span>CORS Pipelines</span>
-            </div>
-            <div class="project-cta-row">
-              <a href="https://monukushwaha9026.github.io/GetNow/" target="_blank" rel="noopener noreferrer" class="btn-inline-primary">Try Live Tool →</a>
-            </div>
-          </div>
-        </article>
-
-        <!-- Project 2: PeerDrop -->
-        <article class="project-card featured">
-          <div class="project-badge">⭐ Live on Render</div>
-          <div class="project-content">
-            <div class="project-top">
-              <span class="project-emoji">📡</span>
-              <div class="project-links">
-                <a href="https://peerdrop-y6w5.onrender.com/" target="_blank" rel="noopener noreferrer" class="link-btn" title="Live Preview">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
-                </a>
-                <a href="https://github.com/Monukushwaha9026/PeerDrop" target="_blank" rel="noopener noreferrer" class="link-btn" title="Source Code">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
-                </a>
+              <p class="project-description">
+                Fast, minimal, and 100% client-side tool to preview and download Pinterest MP4 videos and full-resolution 4K original images with zero server overhead.
+              </p>
+              <div class="project-footer">
+                <div class="tag-row">
+                  <span class="subtle-tag">JavaScript</span>
+                  <span class="subtle-tag">HTML5 / CSS3</span>
+                  <span class="subtle-tag">GitHub Pages</span>
+                </div>
+                <div class="project-actions">
+                  <a href="https://monukushwaha9026.github.io/GetNow/" target="_blank" rel="noopener noreferrer" class="action-pill primary">
+                    Open Live Tool ↗
+                  </a>
+                  <a href="https://github.com/Monukushwaha9026/GetNow" target="_blank" rel="noopener noreferrer" class="action-pill">
+                    GitHub
+                  </a>
+                </div>
               </div>
-            </div>
-            <h3 class="project-title">PeerDrop — P2P File Sharing</h3>
-            <p class="project-desc">
-              Direct device-to-device file transfer over encrypted peer-to-peer web connections. No central servers storing your personal data.
-            </p>
-            <div class="project-tech">
-              <span>WebRTC</span>
-              <span>P2P Networking</span>
-              <span>Node.js / Express</span>
-              <span>WebSockets</span>
-            </div>
-            <div class="project-cta-row" style="display: flex; gap: 1rem; align-items: center;">
-              <a href="https://peerdrop-y6w5.onrender.com/" target="_blank" rel="noopener noreferrer" class="btn-inline-primary">Try Live Tool →</a>
-              <a href="https://github.com/Monukushwaha9026/PeerDrop" target="_blank" rel="noopener noreferrer" class="btn-inline-secondary">GitHub →</a>
-            </div>
-          </div>
-        </article>
+            </article>
 
-        <!-- Project 3: Student ID Manager -->
-        <article class="project-card">
-          <div class="project-content">
-            <div class="project-top">
-              <span class="project-emoji">🪪</span>
-              <div class="project-links">
-                <a href="https://github.com/Monukushwaha9026/Student_id_manager" target="_blank" rel="noopener noreferrer" class="link-btn" title="Source Code">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
-                </a>
+            <!-- Recent 2: PeerDrop -->
+            <article class="minimal-project-card">
+              <div class="project-header">
+                <div>
+                  <h4 class="project-name">PeerDrop</h4>
+                  <p class="project-role">P2P File Transfer Utility</p>
+                </div>
+                <span class="pill-tag">Live on Render</span>
               </div>
-            </div>
-            <h3 class="project-title">Student &amp; Employee ID Manager</h3>
-            <p class="project-desc">
-              Automated management system to generate, update, and manage student and employee identification credentials with structured data records.
-            </p>
-            <div class="project-tech">
-              <span>Python</span>
-              <span>Data Records</span>
-              <span>Automation</span>
-            </div>
-            <div class="project-cta-row">
-              <a href="https://github.com/Monukushwaha9026/Student_id_manager" target="_blank" rel="noopener noreferrer" class="btn-inline-secondary">View on GitHub →</a>
-            </div>
-          </div>
-        </article>
-
-        <!-- Project 4: LexiconGarden -->
-        <article class="project-card featured">
-          <div class="project-badge">⭐ Live on Render</div>
-          <div class="project-content">
-            <div class="project-top">
-              <span class="project-emoji">🌱</span>
-              <div class="project-links">
-                <a href="https://lexicongarden.onrender.com/" target="_blank" rel="noopener noreferrer" class="link-btn" title="Live Preview">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
-                </a>
-                <a href="https://github.com/Monukushwaha9026/Lexicongarden" target="_blank" rel="noopener noreferrer" class="link-btn" title="Source Code">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
-                </a>
+              <p class="project-description">
+                Direct device-to-device encrypted file sharing built with WebSockets signaling and WebRTC. No intermediate servers store your files.
+              </p>
+              <div class="project-footer">
+                <div class="tag-row">
+                  <span class="subtle-tag">WebRTC</span>
+                  <span class="subtle-tag">Node.js</span>
+                  <span class="subtle-tag">WebSockets</span>
+                </div>
+                <div class="project-actions">
+                  <a href="https://peerdrop-y6w5.onrender.com/" target="_blank" rel="noopener noreferrer" class="action-pill primary">
+                    Open Live Tool ↗
+                  </a>
+                  <a href="https://github.com/Monukushwaha9026/PeerDrop" target="_blank" rel="noopener noreferrer" class="action-pill">
+                    GitHub
+                  </a>
+                </div>
               </div>
-            </div>
-            <h3 class="project-title">LexiconGarden</h3>
-            <p class="project-desc">
-              Vocabulary discovery and educational reference web app focused on clear word comprehension and botanical design patterns.
-            </p>
-            <div class="project-tech">
-              <span>Web Development</span>
-              <span>UI/UX</span>
-              <span>Dictionary API</span>
-            </div>
-            <div class="project-cta-row" style="display: flex; gap: 1rem; align-items: center;">
-              <a href="https://lexicongarden.onrender.com/" target="_blank" rel="noopener noreferrer" class="btn-inline-primary">Try Live Tool →</a>
-              <a href="https://github.com/Monukushwaha9026/Lexicongarden" target="_blank" rel="noopener noreferrer" class="btn-inline-secondary">GitHub →</a>
-            </div>
-          </div>
-        </article>
-      </div>
-    </section>
+            </article>
 
-    <!-- Skills & Technologies -->
-    <section class="skills-section" id="skills">
-      <div class="section-header">
-        <span class="section-tag">Capabilities</span>
-        <h2 class="section-title">Skills &amp; Technologies</h2>
-      </div>
-
-      <div class="skills-grid">
-        <div class="skill-category">
-          <div class="category-header">
-            <span class="category-icon">💻</span>
-            <h3>Frontend Development</h3>
-          </div>
-          <div class="skill-tags">
-            <span class="skill-tag">HTML5 / Semantic Web</span>
-            <span class="skill-tag">Modern CSS3 &amp; Flex/Grid</span>
-            <span class="skill-tag">JavaScript (ES6+)</span>
-            <span class="skill-tag">Responsive UI &amp; Mobile-First</span>
-            <span class="skill-tag">DOM &amp; Web APIs</span>
+            <!-- Recent 3: LexiconGarden -->
+            <article class="minimal-project-card">
+              <div class="project-header">
+                <div>
+                  <h4 class="project-name">LexiconGarden</h4>
+                  <p class="project-role">Vocabulary Reference &amp; Dictionary</p>
+                </div>
+                <span class="pill-tag">Live on Render</span>
+              </div>
+              <p class="project-description">
+                Botanical-themed language reference and vocabulary discovery application designed for rapid dictionary lookup and word retention.
+              </p>
+              <div class="project-footer">
+                <div class="tag-row">
+                  <span class="subtle-tag">Web App</span>
+                  <span class="subtle-tag">UI/UX</span>
+                  <span class="subtle-tag">Dictionary API</span>
+                </div>
+                <div class="project-actions">
+                  <a href="https://lexicongarden.onrender.com/" target="_blank" rel="noopener noreferrer" class="action-pill primary">
+                    Open Live Tool ↗
+                  </a>
+                  <a href="https://github.com/Monukushwaha9026/Lexicongarden" target="_blank" rel="noopener noreferrer" class="action-pill">
+                    GitHub
+                  </a>
+                </div>
+              </div>
+            </article>
           </div>
         </div>
+      </section>
 
-        <div class="skill-category">
-          <div class="category-header">
-            <span class="category-icon">🛠️</span>
-            <h3>Tools &amp; Deployment</h3>
-          </div>
-          <div class="skill-tags">
-            <span class="skill-tag">Git &amp; GitHub</span>
-            <span class="skill-tag">GitHub Pages &amp; CI/CD</span>
-            <span class="skill-tag">VS Code</span>
-            <span class="skill-tag">Chrome DevTools</span>
-            <span class="skill-tag">PowerShell / Terminal</span>
-          </div>
-        </div>
+      <!-- 2. MY PROJECTS SECTION -->
+      <section id="section-projects" class="tab-pane">
+        <header class="section-title-wrap">
+          <span class="minimal-pill">Portfolio</span>
+          <h2 class="display-title">My Projects</h2>
+          <p class="subtitle">All personal software projects and live deployed tools</p>
+        </header>
 
-        <div class="skill-category">
-          <div class="category-header">
-            <span class="category-icon">🧠</span>
-            <h3>Core Concepts</h3>
-          </div>
-          <div class="skill-tags">
-            <span class="skill-tag">Single-Page Applications</span>
-            <span class="skill-tag">CORS &amp; Proxy Pipelines</span>
-            <span class="skill-tag">P2P Protocols (WebRTC)</span>
-            <span class="skill-tag">Client-Side Performance</span>
-            <span class="skill-tag">Clean Code Architecture</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- About Section -->
-    <section class="about-section" id="about">
-      <div class="about-card">
-        <div class="about-content">
-          <span class="section-tag">About Me</span>
-          <h2 class="section-title">Passionate About Building Useful Tools</h2>
-          <p>
-            I am a developer focused on turning practical everyday ideas into accessible web applications. I believe that good software should be fast, respect the user's privacy, and have zero unnecessary bloat.
-          </p>
-          <p>
-            From creating client-side media downloaders like <strong>GetNow</strong> to peer-to-peer file transfer platforms like <strong>PeerDrop</strong>, I enjoy diving deep into how web standards and browser APIs work under the hood.
-          </p>
-          <div class="about-highlights">
-            <div class="highlight-item">
-              <span class="check-icon">✓</span>
-              <span>Clean, readable, well-documented code</span>
-            </div>
-            <div class="highlight-item">
-              <span class="check-icon">✓</span>
-              <span>Fast performance without heavy dependencies</span>
-            </div>
-            <div class="highlight-item">
-              <span class="check-icon">✓</span>
-              <span>Continuous learning and building in public</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section class="contact-section" id="contact">
-      <div class="contact-card">
-        <span class="section-tag">Let's Connect</span>
-        <h2 class="contact-title">Interested in collaborating or have an idea?</h2>
-        <p class="contact-subtitle">Feel free to reach out via email or connect with me on LinkedIn and GitHub.</p>
-
-        <div class="contact-options">
-          <div class="contact-box">
-            <div class="contact-box-left">
-              <span class="contact-icon">✉️</span>
+        <div class="projects-list">
+          <!-- Project 1: GetNow -->
+          <article class="minimal-project-card">
+            <div class="project-header">
               <div>
-                <span class="contact-label">Email</span>
-                <span class="contact-val" id="emailVal">monukushwaha9026@gmail.com</span>
+                <h4 class="project-name">GetNow — Pinterest Downloader</h4>
+                <p class="project-role">Client-Side Web Application</p>
+              </div>
+              <span class="pill-tag">Live on GitHub Pages</span>
+            </div>
+            <p class="project-description">
+              A minimalist, zero-dependency web application enabling users to paste any Pinterest link to instantly preview and download full HD videos (MP4) and original 4K images. Features a 1-tap clipboard paste button and browser download handling.
+            </p>
+            <div class="project-footer">
+              <div class="tag-row">
+                <span class="subtle-tag">JavaScript (ES6+)</span>
+                <span class="subtle-tag">HTML5 / CSS3</span>
+                <span class="subtle-tag">CORS Pipeline</span>
+                <span class="subtle-tag">GitHub Pages</span>
+              </div>
+              <div class="project-actions">
+                <a href="https://monukushwaha9026.github.io/GetNow/" target="_blank" rel="noopener noreferrer" class="action-pill primary">
+                  Try Live Tool ↗
+                </a>
+                <a href="https://github.com/Monukushwaha9026/GetNow" target="_blank" rel="noopener noreferrer" class="action-pill">
+                  GitHub Code
+                </a>
               </div>
             </div>
-            <button id="copyEmailBtn" class="btn-copy">Copy</button>
+          </article>
+
+          <!-- Project 2: PeerDrop -->
+          <article class="minimal-project-card">
+            <div class="project-header">
+              <div>
+                <h4 class="project-name">PeerDrop — P2P File Transfer</h4>
+                <p class="project-role">WebRTC Peer-to-Peer System</p>
+              </div>
+              <span class="pill-tag">Live on Render</span>
+            </div>
+            <p class="project-description">
+              Browser-based peer-to-peer file sharing web app powered by WebRTC and WebSockets. Enables high-speed, direct file transfers between devices on any network without cloud storage limits or surveillance.
+            </p>
+            <div class="project-footer">
+              <div class="tag-row">
+                <span class="subtle-tag">WebRTC</span>
+                <span class="subtle-tag">Node.js</span>
+                <span class="subtle-tag">Express</span>
+                <span class="subtle-tag">WebSocket (ws)</span>
+              </div>
+              <div class="project-actions">
+                <a href="https://peerdrop-y6w5.onrender.com/" target="_blank" rel="noopener noreferrer" class="action-pill primary">
+                  Try Live Tool ↗
+                </a>
+                <a href="https://github.com/Monukushwaha9026/PeerDrop" target="_blank" rel="noopener noreferrer" class="action-pill">
+                  GitHub Code
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Project 3: LexiconGarden -->
+          <article class="minimal-project-card">
+            <div class="project-header">
+              <div>
+                <h4 class="project-name">LexiconGarden</h4>
+                <p class="project-role">Language &amp; Vocabulary Discovery Web App</p>
+              </div>
+              <span class="pill-tag">Live on Render</span>
+            </div>
+            <p class="project-description">
+              Minimalist educational dictionary and vocabulary reference tool designed to make language comprehension intuitive with organic botanical styling and real-time word lookup.
+            </p>
+            <div class="project-footer">
+              <div class="tag-row">
+                <span class="subtle-tag">Web App</span>
+                <span class="subtle-tag">UI/UX</span>
+                <span class="subtle-tag">Dictionary API</span>
+                <span class="subtle-tag">Render Cloud</span>
+              </div>
+              <div class="project-actions">
+                <a href="https://lexicongarden.onrender.com/" target="_blank" rel="noopener noreferrer" class="action-pill primary">
+                  Try Live Tool ↗
+                </a>
+                <a href="https://github.com/Monukushwaha9026/Lexicongarden" target="_blank" rel="noopener noreferrer" class="action-pill">
+                  GitHub Code
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Project 4: Student ID Manager -->
+          <article class="minimal-project-card">
+            <div class="project-header">
+              <div>
+                <h4 class="project-name">Student &amp; Employee ID Manager</h4>
+                <p class="project-role">Automation &amp; Records Management Utility</p>
+              </div>
+              <span class="pill-tag">Python CLI / System</span>
+            </div>
+            <p class="project-description">
+              A comprehensive system utility to generate, update, validate, and manage student and employee identification credentials with structured file databases and data integrity verification.
+            </p>
+            <div class="project-footer">
+              <div class="tag-row">
+                <span class="subtle-tag">Python</span>
+                <span class="subtle-tag">Data Management</span>
+                <span class="subtle-tag">Automation</span>
+              </div>
+              <div class="project-actions">
+                <a href="https://github.com/Monukushwaha9026/Student_id_manager" target="_blank" rel="noopener noreferrer" class="action-pill">
+                  View on GitHub ↗
+                </a>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- 3. MY SKILLS SECTION -->
+      <section id="section-skills" class="tab-pane">
+        <header class="section-title-wrap">
+          <span class="minimal-pill">Expertise</span>
+          <h2 class="display-title">My Skills</h2>
+          <p class="subtitle">Languages, programming languages, technologies, and developer tools</p>
+        </header>
+
+        <div class="skills-sections-stack">
+          <!-- Spoken / Natural Languages -->
+          <div class="minimal-card">
+            <h3 class="card-title">Languages (Spoken)</h3>
+            <p class="card-note">Natural languages for communication and collaboration</p>
+            <div class="capsule-grid">
+              <div class="capsule-item">
+                <span class="capsule-name">Hindi</span>
+                <span class="capsule-level">Native / Fluent</span>
+              </div>
+              <div class="capsule-item">
+                <span class="capsule-name">English</span>
+                <span class="capsule-level">Professional Working</span>
+              </div>
+            </div>
           </div>
 
-          <div class="contact-buttons-row">
-            <a href="https://www.linkedin.com/in/monukushwaha9026/" target="_blank" rel="noopener noreferrer" class="btn-social-contact linkedin">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
-              </svg>
-              <span>Connect on LinkedIn</span>
-            </a>
+          <!-- Programming Languages -->
+          <div class="minimal-card">
+            <h3 class="card-title">Programming Languages</h3>
+            <p class="card-note">Core languages used for building software and web applications</p>
+            <div class="capsule-grid">
+              <div class="capsule-item">
+                <span class="capsule-name">JavaScript (ES6+)</span>
+                <span class="capsule-level">Advanced</span>
+              </div>
+              <div class="capsule-item">
+                <span class="capsule-name">Python</span>
+                <span class="capsule-level">Intermediate</span>
+              </div>
+              <div class="capsule-item">
+                <span class="capsule-name">HTML5</span>
+                <span class="capsule-level">Semantic &amp; Modern</span>
+              </div>
+              <div class="capsule-item">
+                <span class="capsule-name">CSS3</span>
+                <span class="capsule-level">Flexbox, Grid &amp; Variables</span>
+              </div>
+            </div>
+          </div>
 
-            <a href="https://github.com/Monukushwaha9026" target="_blank" rel="noopener noreferrer" class="btn-social-contact github">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
-              </svg>
-              <span>Follow on GitHub</span>
-            </a>
+          <!-- Tools & Platforms Known -->
+          <div class="minimal-card">
+            <h3 class="card-title">Tools &amp; Platforms</h3>
+            <p class="card-note">Tools, cloud platforms, and developer environment</p>
+            <div class="capsule-grid">
+              <div class="capsule-item">
+                <span class="capsule-name">Git &amp; GitHub</span>
+                <span class="capsule-level">Version Control &amp; PRs</span>
+              </div>
+              <div class="capsule-item">
+                <span class="capsule-name">GitHub Pages</span>
+                <span class="capsule-level">Static Hosting &amp; CI/CD</span>
+              </div>
+              <div class="capsule-item">
+                <span class="capsule-name">Render</span>
+                <span class="capsule-level">Node.js Cloud Hosting</span>
+              </div>
+              <div class="capsule-item">
+                <span class="capsule-name">VS Code</span>
+                <span class="capsule-level">Primary IDE</span>
+              </div>
+              <div class="capsule-item">
+                <span class="capsule-name">PowerShell &amp; Terminal</span>
+                <span class="capsule-level">CLI Workflows</span>
+              </div>
+              <div class="capsule-item">
+                <span class="capsule-name">Chrome DevTools</span>
+                <span class="capsule-level">Debugging &amp; Network</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Technical Concepts -->
+          <div class="minimal-card">
+            <h3 class="card-title">Technical Concepts &amp; Architecture</h3>
+            <p class="card-note">Specialized engineering practices</p>
+            <div class="capsule-grid">
+              <div class="capsule-item">
+                <span class="capsule-name">WebRTC &amp; WebSockets</span>
+                <span class="capsule-level">P2P Protocols</span>
+              </div>
+              <div class="capsule-item">
+                <span class="capsule-name">RESTful APIs</span>
+                <span class="capsule-level">Integration &amp; Design</span>
+              </div>
+              <div class="capsule-item">
+                <span class="capsule-name">CORS Handling</span>
+                <span class="capsule-level">Proxy Architecture</span>
+              </div>
+              <div class="capsule-item">
+                <span class="capsule-name">Minimalist UI/UX</span>
+                <span class="capsule-level">Human-Centered Design</span>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-    </section>
-  </main>
+      </section>
 
-  <!-- Footer -->
-  <footer class="footer">
-    <div class="footer-content">
-      <p>© <span id="currentYear"></span> Monu Kushwaha. Hosted on GitHub Pages.</p>
-      <div class="footer-links">
-        <a href="#hero">Back to top ↑</a>
-      </div>
-    </div>
-  </footer>
+      <!-- 4. MY LEARNING SECTION -->
+      <section id="section-learning" class="tab-pane">
+        <header class="section-title-wrap">
+          <span class="minimal-pill">Education</span>
+          <h2 class="display-title">My Learning</h2>
+          <p class="subtitle">Where and what I learned — formal education &amp; continuous mastery</p>
+        </header>
 
-  <!-- Toast Notification -->
-  <div id="toast" class="toast hidden">Copied to clipboard!</div>
+        <div class="learning-timeline">
+          <!-- College / University Card -->
+          <div class="minimal-card timeline-card">
+            <div class="timeline-header">
+              <span class="pill-tag">College / University</span>
+              <span class="timeline-period">Degree / Studies</span>
+            </div>
+            <h3 class="timeline-institution">College / University Education</h3>
+            <p class="timeline-degree">Computer Science &amp; Information Technology / Engineering</p>
+            <p class="timeline-description">
+              Pursuing comprehensive academic grounding in computer science fundamentals, data structures, algorithms, object-oriented programming, and computer networks. Applied coursework directly to practical development of web utilities and open-source applications.
+            </p>
+            <div class="tag-row">
+              <span class="subtle-tag">Computer Science Fundamentals</span>
+              <span class="subtle-tag">Software Engineering</span>
+              <span class="subtle-tag">Database Management</span>
+            </div>
+          </div>
+
+          <!-- Self-Directed Learning & Milestones -->
+          <div class="minimal-card timeline-card">
+            <div class="timeline-header">
+              <span class="pill-tag">Continuous Mastery</span>
+              <span class="timeline-period">Ongoing Self-Directed</span>
+            </div>
+            <h3 class="timeline-institution">Modern Web Engineering &amp; Protocols</h3>
+            <p class="timeline-degree">Practical Projects &amp; Web Standards</p>
+            <p class="timeline-description">
+              Hands-on mastery of peer-to-peer networking (WebRTC, STUN/TURN, signaling architectures), client-side media manipulation, asynchronous JavaScript programming, and full-stack deployment workflows on Render and GitHub Pages.
+            </p>
+            <div class="tag-row">
+              <span class="subtle-tag">WebRTC P2P</span>
+              <span class="subtle-tag">Node.js Server Architecture</span>
+              <span class="subtle-tag">Client-Side Performance</span>
+              <span class="subtle-tag">Open Source Building</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Minimal Page Footer -->
+      <footer class="minimal-footer">
+        <p>© <span id="yearSpan"></span> Monu Kushwaha. Minimal White &amp; Black Design.</p>
+        <div class="footer-bottom-links">
+          <a href="https://github.com/Monukushwaha9026/monukushwaha9026.github.io" target="_blank" rel="noopener noreferrer">Source Code ↗</a>
+        </div>
+      </footer>
+    </main>
+  </div>
 
   <script src="script.js"></script>
 </body>
