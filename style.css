@@ -251,7 +251,7 @@ body {
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* Section Header Typography - Sticky Hard */
+/* Section Header Typography - Interactive Shrink on Scroll */
 .section-title-wrap {
   position: sticky;
   top: var(--mobile-sidebar-height, 0px);
@@ -260,6 +260,11 @@ body {
   padding: 2.25rem 0 1.25rem;
   margin-bottom: 2rem;
   border-bottom: 1px solid var(--border-light);
+  transition: padding 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              margin-bottom 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              background-color 0.35s ease,
+              box-shadow 0.35s ease,
+              border-color 0.35s ease;
 }
 
 .minimal-pill {
@@ -275,6 +280,15 @@ body {
   border-radius: var(--radius-pill);
   margin-bottom: 0.85rem;
   font-family: var(--font-mono);
+  max-height: 40px;
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.25s ease,
+              max-height 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              margin-bottom 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              padding 0.3s ease,
+              transform 0.25s ease,
+              border-color 0.25s ease;
 }
 
 .display-title {
@@ -284,12 +298,64 @@ body {
   line-height: 1.15;
   color: var(--text-black);
   margin-bottom: 0.5rem;
+  transition: font-size 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              letter-spacing 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              margin-bottom 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              line-height 0.35s ease;
 }
 
 .subtitle {
   font-size: 1.05rem;
   color: var(--text-gray);
   font-weight: 400;
+  max-height: 60px;
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.2s ease,
+              max-height 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              margin 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.2s ease;
+}
+
+/* ============================================================
+   SHRUNK / SCROLLED STATE (Compact Apple-Style Header)
+   ============================================================ */
+.section-title-wrap.scrolled {
+  padding: 0.85rem 0;
+  margin-bottom: 1.5rem;
+  background-color: rgba(250, 250, 250, 0.92);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.03);
+  border-bottom: 1px solid var(--border-light);
+}
+
+.section-title-wrap.scrolled .minimal-pill {
+  opacity: 0;
+  max-height: 0;
+  margin-bottom: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  transform: translateY(-8px);
+  pointer-events: none;
+  border-color: transparent;
+  overflow: hidden;
+}
+
+.section-title-wrap.scrolled .display-title {
+  font-size: 1.25rem;
+  letter-spacing: -0.4px;
+  margin-bottom: 0;
+  line-height: 1.2;
+}
+
+.section-title-wrap.scrolled .subtitle {
+  opacity: 0;
+  max-height: 0;
+  margin: 0;
+  transform: translateY(-6px);
+  pointer-events: none;
+  overflow: hidden;
 }
 
 /* Social Handles Pill Box */
@@ -735,8 +801,17 @@ body {
     margin-bottom: 1.5rem;
   }
 
+  .section-title-wrap.scrolled {
+    padding: 0.65rem 0;
+    margin-bottom: 1.25rem;
+  }
+
   .display-title {
     font-size: 2.1rem;
+  }
+
+  .section-title-wrap.scrolled .display-title {
+    font-size: 1.15rem;
   }
 
   .summary-meta-grid {

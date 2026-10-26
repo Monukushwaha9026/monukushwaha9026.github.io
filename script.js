@@ -40,6 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
     window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
     document.documentElement.scrollTop = 0;
     document.body.scrollTop = 0;
+    resetHeaderState();
   }
 
   // Bind click on sidebar nav items
@@ -76,4 +77,29 @@ document.addEventListener('DOMContentLoaded', () => {
 
   updateStickyOffset();
   window.addEventListener('resize', updateStickyOffset);
+
+  // 5. Interactive Shrinking Header on Scroll (Apple Large Title Pattern)
+  const titleWraps = document.querySelectorAll('.section-title-wrap');
+  let isShrunk = false;
+
+  function updateHeaderShrink() {
+    const scrollY = window.pageYOffset || document.documentElement.scrollTop || 0;
+
+    // Hysteresis: shrink when scrolled past 45px, expand when back near top (<20px)
+    if (!isShrunk && scrollY > 45) {
+      isShrunk = true;
+      titleWraps.forEach(wrap => wrap.classList.add('scrolled'));
+    } else if (isShrunk && scrollY < 20) {
+      isShrunk = false;
+      titleWraps.forEach(wrap => wrap.classList.remove('scrolled'));
+    }
+  }
+
+  function resetHeaderState() {
+    isShrunk = false;
+    titleWraps.forEach(wrap => wrap.classList.remove('scrolled'));
+  }
+
+  window.addEventListener('scroll', updateHeaderShrink, { passive: true });
+  updateHeaderShrink();
 });
