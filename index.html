@@ -36,6 +36,10 @@
     };
   </script>
   <style>
+    :root {
+      --spring: cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
     /* Hide scrollbars cleanly for horizontal pill navigation */
     .no-scrollbar::-webkit-scrollbar {
       display: none;
@@ -49,7 +53,7 @@
     @keyframes fadeSlideUp {
       from {
         opacity: 0;
-        transform: translateY(8px);
+        transform: translateY(10px);
       }
       to {
         opacity: 1;
@@ -57,23 +61,99 @@
       }
     }
     .animate-panel {
-      animation: fadeSlideUp 0.24s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      animation: fadeSlideUp 0.28s var(--spring) forwards;
+    }
+
+    /* Fluid background drifting gradient blobs */
+    @keyframes driftBlob1 {
+      0% { transform: translate3d(0, 0, 0) scale(1); }
+      50% { transform: translate3d(80px, 60px, 0) scale(1.1); }
+      100% { transform: translate3d(-35px, 85px, 0) scale(0.95); }
+    }
+    @keyframes driftBlob2 {
+      0% { transform: translate3d(0, 0, 0) scale(1); }
+      50% { transform: translate3d(-85px, -45px, 0) scale(1.12); }
+      100% { transform: translate3d(45px, 65px, 0) scale(0.92); }
+    }
+    @keyframes driftBlob3 {
+      0% { transform: translate3d(0, 0, 0) scale(1); }
+      50% { transform: translate3d(-55px, -65px, 0) scale(1.08); }
+      100% { transform: translate3d(65px, -25px, 0) scale(1.02); }
+    }
+    .blob-1 { animation: driftBlob1 22s ease-in-out infinite alternate; }
+    .blob-2 { animation: driftBlob2 26s ease-in-out infinite alternate; }
+    .blob-3 { animation: driftBlob3 20s ease-in-out infinite alternate; }
+
+    /* Ambient header & sidebar aura breathing */
+    @keyframes auraBreath {
+      0%, 100% { transform: scale(1) translate(0, 0); opacity: 0.6; }
+      50% { transform: scale(1.22) translate(14px, 8px); opacity: 0.95; }
+    }
+    .ambient-aura {
+      animation: auraBreath 14s ease-in-out infinite alternate;
+    }
+
+    /* Dual-ring radar status beacon */
+    @keyframes radarRing2 {
+      0% { transform: scale(0.8); opacity: 0.8; }
+      50% { transform: scale(1.9); opacity: 0.25; }
+      100% { transform: scale(2.6); opacity: 0; }
+    }
+    .radar-ring-2 {
+      animation: radarRing2 2s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+    }
+
+    /* Staggered card entrance */
+    @keyframes cardEntrance {
+      from {
+        opacity: 0;
+        transform: translateY(14px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    .card-stagger {
+      opacity: 0;
+      animation: cardEntrance 0.38s var(--spring) forwards;
+    }
+
+    /* Desktop 3D perspective setup */
+    .project-card {
+      perspective: 900px;
+      transform-style: preserve-3d;
+      will-change: transform;
+    }
+    .project-card-inner {
+      transition: transform 0.2s var(--spring), box-shadow 0.2s var(--spring), border-color 0.2s ease;
+      transform-style: preserve-3d;
     }
   </style>
 </head>
-<body class="bg-[#F8FAFC] text-slate-900 font-sans antialiased selection:bg-obsidian-900 selection:text-white min-h-screen">
+<body class="bg-[#F3F7FD] text-slate-900 font-sans antialiased selection:bg-obsidian-900 selection:text-white min-h-screen relative overflow-x-hidden">
+
+  <!-- ==================== SUBTLE FLUID DRIFTING BACKGROUND BLOBS ==================== -->
+  <div class="fixed inset-0 pointer-events-none -z-10 overflow-hidden" aria-hidden="true">
+    <div class="blob-1 absolute w-[600px] h-[600px] rounded-full blur-[110px] opacity-70 bg-gradient-to-tr from-blue-400/20 via-sky-300/15 to-transparent -top-36 -left-36"></div>
+    <div class="blob-2 absolute w-[680px] h-[680px] rounded-full blur-[130px] opacity-65 bg-gradient-to-bl from-indigo-300/15 via-blue-300/15 to-transparent top-1/3 -right-60"></div>
+    <div class="blob-3 absolute w-[550px] h-[550px] rounded-full blur-[110px] opacity-70 bg-gradient-to-r from-sky-400/15 to-cyan-300/10 bottom-0 left-1/4"></div>
+  </div>
 
   <!-- Responsive Layout Container: Mobile full-bleed (<960px) -> Desktop 1200px split-pane (>=960px) -->
   <div id="app-shell" class="w-full min-h-screen desk:max-w-[1200px] desk:mx-auto desk:p-8 flex flex-col desk:flex-row desk:items-start desk:gap-8 relative">
 
     <!-- ==================== IDENTITY HEADER / STICKY DESKTOP SIDEBAR ==================== -->
-    <aside class="w-full desk:w-[310px] desk:shrink-0 desk:sticky desk:top-8 bg-obsidian-900 text-white pt-6 pb-4 px-5 desk:p-6 desk:rounded-[24px] border-b desk:border border-white/[0.08] desk:shadow-[0_20px_50px_-15px_rgba(13,16,23,0.22)] z-20">
+    <aside class="w-full desk:w-[310px] desk:shrink-0 desk:sticky desk:top-8 bg-obsidian-900 text-white pt-6 pb-4 px-5 desk:p-6 desk:rounded-[24px] border-b desk:border border-white/[0.08] desk:shadow-[0_20px_50px_-15px_rgba(13,16,23,0.22)] z-20 relative overflow-hidden">
       
+      <!-- Ambient Breathing Aura inside sidebar -->
+      <div class="pointer-events-none absolute -top-24 -left-24 w-72 h-72 rounded-full bg-gradient-to-br from-blue-500/15 via-cyan-500/10 to-transparent blur-3xl ambient-aura"></div>
+
       <!-- Identity Info Block (Horizontal on mobile, Centered/Stacked on desktop) -->
-      <div class="flex desk:flex-col items-center desk:items-start gap-3.5 desk:gap-4">
+      <div class="relative z-10 flex desk:flex-col items-center desk:items-start gap-3.5 desk:gap-4">
         <!-- Circular Avatar with subtle ring -->
         <div class="relative shrink-0">
-          <div class="w-14 h-14 desk:w-20 desk:h-20 rounded-full p-[2px] bg-gradient-to-b from-white/30 to-white/5">
+          <div class="w-14 h-14 desk:w-20 desk:h-20 rounded-full p-[2px] bg-gradient-to-b from-white/30 to-white/5 shadow-md">
             <img
               src="https://avatars.githubusercontent.com/u/245680805?v=4"
               onerror="this.onerror=null;this.src='https://avatars.githubusercontent.com/u/142862995?v=4';"
@@ -93,9 +173,13 @@
             @Monukushwaha9026
           </p>
 
-          <!-- Pulsing Availability Pill -->
-          <div class="mt-2 desk:mt-3 inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-white/[0.06] border border-white/[0.09]">
-            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+          <!-- Dual-Ring Radar Pulsing Availability Pill -->
+          <div class="mt-2 desk:mt-3 inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-white/[0.06] border border-white/[0.09] backdrop-blur-sm">
+            <span class="relative flex h-2 w-2 items-center justify-center">
+              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-60"></span>
+              <span class="radar-ring-2 absolute inline-flex h-full w-full rounded-full bg-emerald-300 opacity-40"></span>
+              <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.8)]"></span>
+            </span>
             <span class="text-[11px] font-medium text-slate-200 tracking-wide">Available for work</span>
           </div>
 
@@ -106,21 +190,16 @@
         </div>
       </div>
 
-      <!-- Navigation Pills: Horizontal Scrollable on Mobile (<960px) | Vertical Stacked on Desktop (>=960px) -->
-      <nav aria-label="Portfolio sections" class="mt-5 desk:mt-6 -mx-5 px-5 desk:mx-0 desk:px-0 overflow-x-auto desk:overflow-visible no-scrollbar">
-        <div id="nav-tabs" class="inline-flex desk:flex desk:flex-col items-center desk:items-stretch gap-1.5 desk:gap-2 min-w-full pb-0.5" role="tablist">
+      <!-- Navigation Pills with Liquid Sliding White Pill Indicator -->
+      <nav aria-label="Portfolio sections" class="relative z-10 mt-5 desk:mt-6 -mx-5 px-5 desk:mx-0 desk:px-0 overflow-x-auto desk:overflow-visible no-scrollbar">
+        <div id="nav-tabs" class="relative inline-flex desk:flex desk:flex-col items-center desk:items-stretch gap-1.5 desk:gap-2 min-w-full pb-0.5" role="tablist">
           
-          <!-- Profile Tab -->
-          <button
-            type="button"
-            role="tab"
-            data-tab="profile"
-            aria-selected="false"
-            class="nav-tab min-h-[40px] desk:min-h-[44px] px-3.5 desk:px-4 py-2 rounded-full desk:rounded-2xl text-[13px] desk:text-[13.5px] font-medium inline-flex items-center justify-start gap-2 desk:gap-3 whitespace-nowrap transition-all duration-150 text-slate-400 hover:text-white desk:hover:bg-white/[0.05] active:scale-[0.98]"
-          >
-            <i data-lucide="user" class="w-3.5 h-3.5 desk:w-4 desk:h-4 shrink-0"></i>
-            <span>Profile</span>
-          </button>
+          <!-- Shared Liquid Sliding White Pill Indicator -->
+          <div
+            id="nav-pill-indicator"
+            class="absolute pointer-events-none rounded-full desk:rounded-2xl bg-white shadow-sm"
+            style="opacity: 0; z-index: 1; transition: transform 0.32s cubic-bezier(0.22, 1, 0.36, 1), width 0.32s cubic-bezier(0.22, 1, 0.36, 1), height 0.32s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.2s ease;"
+          ></div>
 
           <!-- My Projects Tab (Default Active) -->
           <button
@@ -128,13 +207,25 @@
             role="tab"
             data-tab="projects"
             aria-selected="true"
-            class="nav-tab min-h-[40px] desk:min-h-[44px] px-3.5 desk:px-4 py-2 rounded-full desk:rounded-2xl text-[13px] desk:text-[13.5px] font-semibold inline-flex items-center justify-between gap-2 whitespace-nowrap transition-all duration-150 bg-white text-obsidian-900 shadow-sm active:scale-[0.98]"
+            class="nav-tab relative z-10 min-h-[40px] desk:min-h-[44px] px-3.5 desk:px-4 py-2 rounded-full desk:rounded-2xl text-[13px] desk:text-[13.5px] font-semibold inline-flex items-center justify-between gap-2 whitespace-nowrap text-obsidian-900 active:scale-[0.98] transition-colors duration-200"
           >
             <span class="inline-flex items-center gap-2 desk:gap-3">
               <i data-lucide="briefcase" class="w-3.5 h-3.5 desk:w-4 desk:h-4 shrink-0"></i>
               <span>My Projects</span>
             </span>
-            <span class="tab-badge inline-flex items-center justify-center min-w-[20px] h-5 px-1.5 rounded-full text-[11px] font-mono font-semibold bg-obsidian-900 text-white">6</span>
+            <span class="tab-badge inline-flex items-center justify-center min-w-[20px] h-5 px-1.5 rounded-full text-[11px] font-mono font-semibold bg-obsidian-900 text-white transition-colors duration-200">7</span>
+          </button>
+
+          <!-- Profile Tab -->
+          <button
+            type="button"
+            role="tab"
+            data-tab="profile"
+            aria-selected="false"
+            class="nav-tab relative z-10 min-h-[40px] desk:min-h-[44px] px-3.5 desk:px-4 py-2 rounded-full desk:rounded-2xl text-[13px] desk:text-[13.5px] font-medium inline-flex items-center justify-start gap-2 desk:gap-3 whitespace-nowrap text-slate-400 hover:text-white desk:hover:bg-white/[0.04] active:scale-[0.98] transition-colors duration-200"
+          >
+            <i data-lucide="user" class="w-3.5 h-3.5 desk:w-4 desk:h-4 shrink-0"></i>
+            <span>Profile</span>
           </button>
 
           <!-- My Skills Tab -->
@@ -143,7 +234,7 @@
             role="tab"
             data-tab="skills"
             aria-selected="false"
-            class="nav-tab min-h-[40px] desk:min-h-[44px] px-3.5 desk:px-4 py-2 rounded-full desk:rounded-2xl text-[13px] desk:text-[13.5px] font-medium inline-flex items-center justify-start gap-2 desk:gap-3 whitespace-nowrap transition-all duration-150 text-slate-400 hover:text-white desk:hover:bg-white/[0.05] active:scale-[0.98]"
+            class="nav-tab relative z-10 min-h-[40px] desk:min-h-[44px] px-3.5 desk:px-4 py-2 rounded-full desk:rounded-2xl text-[13px] desk:text-[13.5px] font-medium inline-flex items-center justify-start gap-2 desk:gap-3 whitespace-nowrap text-slate-400 hover:text-white desk:hover:bg-white/[0.04] active:scale-[0.98] transition-colors duration-200"
           >
             <i data-lucide="zap" class="w-3.5 h-3.5 desk:w-4 desk:h-4 shrink-0"></i>
             <span>My Skills</span>
@@ -155,7 +246,7 @@
             role="tab"
             data-tab="contact"
             aria-selected="false"
-            class="nav-tab min-h-[40px] desk:min-h-[44px] px-3.5 desk:px-4 py-2 rounded-full desk:rounded-2xl text-[13px] desk:text-[13.5px] font-medium inline-flex items-center justify-start gap-2 desk:gap-3 whitespace-nowrap transition-all duration-150 text-slate-400 hover:text-white desk:hover:bg-white/[0.05] active:scale-[0.98]"
+            class="nav-tab relative z-10 min-h-[40px] desk:min-h-[44px] px-3.5 desk:px-4 py-2 rounded-full desk:rounded-2xl text-[13px] desk:text-[13.5px] font-medium inline-flex items-center justify-start gap-2 desk:gap-3 whitespace-nowrap text-slate-400 hover:text-white desk:hover:bg-white/[0.04] active:scale-[0.98] transition-colors duration-200"
           >
             <i data-lucide="send" class="w-3.5 h-3.5 desk:w-4 desk:h-4 shrink-0"></i>
             <span>Contact</span>
@@ -164,7 +255,7 @@
       </nav>
 
       <!-- Desktop Sidebar Quick Social & Email Footer -->
-      <div class="hidden desk:block mt-6 pt-5 border-t border-white/[0.08]">
+      <div class="relative z-10 hidden desk:block mt-6 pt-5 border-t border-white/[0.08]">
         <div class="flex items-center justify-between gap-2">
           <a href="https://github.com/Monukushwaha9026" target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="w-10 h-10 rounded-xl bg-white/[0.05] hover:bg-white/[0.12] text-slate-300 hover:text-white flex items-center justify-center transition-colors" title="GitHub">
             <i data-lucide="github" class="w-4 h-4"></i>
@@ -194,7 +285,7 @@
         <!-- Section Eyebrow & Heading -->
         <div class="desk:flex desk:items-end desk:justify-between desk:gap-4">
           <div>
-            <span class="inline-block font-mono text-[10.5px] font-semibold uppercase tracking-[0.12em] text-slate-600 bg-white border border-slate-200/90 px-2.5 py-1 rounded-full shadow-[0_1px_2px_rgba(0,0,0,0.02)]">
+            <span class="inline-block font-mono text-[10.5px] font-semibold uppercase tracking-[0.12em] text-slate-600 bg-white border border-slate-200/90 px-2.5 py-1 rounded-full shadow-[0_1px_2px_rgba(0,0,0,0.03)]">
               PORTFOLIO
             </span>
             <h2 id="heading-projects" class="mt-3 text-[24px] desk:text-[28px] font-bold tracking-tight text-slate-900 leading-tight">
@@ -211,33 +302,33 @@
 
         <!-- Category Filter Pills -->
         <div id="category-filters" class="flex items-center gap-1.5 desk:gap-2 overflow-x-auto no-scrollbar pb-1 mb-4 desk:mb-5">
-          <button type="button" data-filter="all" class="filter-pill min-h-[36px] px-3.5 rounded-full text-[12px] desk:text-[12.5px] font-medium bg-obsidian-900 text-white transition-colors whitespace-nowrap">
-            All (6)
+          <button type="button" data-filter="all" class="filter-pill min-h-[36px] px-3.5 rounded-full text-[12px] desk:text-[12.5px] font-medium bg-obsidian-900 text-white shadow-sm transition-all duration-150 whitespace-nowrap active:scale-[0.98]">
+            All (7)
           </button>
-          <button type="button" data-filter="webapp" class="filter-pill min-h-[36px] px-3.5 rounded-full text-[12px] desk:text-[12.5px] font-medium bg-white text-slate-600 border border-[#E2E8F0] hover:border-slate-300 transition-colors whitespace-nowrap">
+          <button type="button" data-filter="webapp" class="filter-pill min-h-[36px] px-3.5 rounded-full text-[12px] desk:text-[12.5px] font-medium bg-white text-slate-600 border border-slate-200 hover:border-slate-300 shadow-sm transition-all duration-150 whitespace-nowrap active:scale-[0.98]">
             Web Apps
           </button>
-          <button type="button" data-filter="extension" class="filter-pill min-h-[36px] px-3.5 rounded-full text-[12px] desk:text-[12.5px] font-medium bg-white text-slate-600 border border-[#E2E8F0] hover:border-slate-300 transition-colors whitespace-nowrap">
+          <button type="button" data-filter="extension" class="filter-pill min-h-[36px] px-3.5 rounded-full text-[12px] desk:text-[12.5px] font-medium bg-white text-slate-600 border border-slate-200 hover:border-slate-300 shadow-sm transition-all duration-150 whitespace-nowrap active:scale-[0.98]">
             Chrome Extension
           </button>
-          <button type="button" data-filter="ai" class="filter-pill min-h-[36px] px-3.5 rounded-full text-[12px] desk:text-[12.5px] font-medium bg-white text-slate-600 border border-[#E2E8F0] hover:border-slate-300 transition-colors whitespace-nowrap">
+          <button type="button" data-filter="ai" class="filter-pill min-h-[36px] px-3.5 rounded-full text-[12px] desk:text-[12.5px] font-medium bg-white text-slate-600 border border-slate-200 hover:border-slate-300 shadow-sm transition-all duration-150 whitespace-nowrap active:scale-[0.98]">
             AI &amp; Tools
           </button>
-          <button type="button" data-filter="networking" class="filter-pill min-h-[36px] px-3.5 rounded-full text-[12px] desk:text-[12.5px] font-medium bg-white text-slate-600 border border-[#E2E8F0] hover:border-slate-300 transition-colors whitespace-nowrap">
+          <button type="button" data-filter="networking" class="filter-pill min-h-[36px] px-3.5 rounded-full text-[12px] desk:text-[12.5px] font-medium bg-white text-slate-600 border border-slate-200 hover:border-slate-300 shadow-sm transition-all duration-150 whitespace-nowrap active:scale-[0.98]">
             Networking
           </button>
         </div>
 
         <!-- Responsive Project Cards Grid: 1-col on mobile, 2-col on desktop (>=960px) -->
         <div id="projects-list" class="grid grid-cols-1 desk:grid-cols-2 gap-3.5 desk:gap-4">
-          <!-- Populated cleanly via JS -->
+          <!-- Populated cleanly via JS with Staggered Entrance & 3D Tilt -->
         </div>
       </section>
 
       <!-- ==================== TAB 2: PROFILE ==================== -->
       <section id="panel-profile" class="tab-panel hidden animate-panel" aria-labelledby="heading-profile">
         <div>
-          <span class="inline-block font-mono text-[10.5px] font-semibold uppercase tracking-[0.12em] text-slate-600 bg-white border border-[#E2E8F0] px-2.5 py-1 rounded-full">
+          <span class="inline-block font-mono text-[10.5px] font-semibold uppercase tracking-[0.12em] text-slate-600 bg-white border border-[#E2E8F0] px-2.5 py-1 rounded-full shadow-[0_1px_2px_rgba(0,0,0,0.03)]">
             ABOUT ME
           </span>
           <h2 id="heading-profile" class="mt-3 text-[24px] desk:text-[28px] font-bold tracking-tight text-slate-900 leading-tight">
@@ -253,7 +344,7 @@
         <div class="grid grid-cols-1 desk:grid-cols-12 gap-3.5 desk:gap-4">
           <!-- Bio & Focus Areas (Left 7 cols on desktop) -->
           <div class="desk:col-span-7 space-y-3.5 desk:space-y-4">
-            <div class="bg-white rounded-2xl border border-[#E2E8F0] p-4 desk:p-5 shadow-[0_1px_3px_rgba(15,23,42,0.03)]">
+            <div class="bg-white rounded-2xl border border-[#E2E8F0] p-4 desk:p-5 shadow-[0_2px_8px_rgba(15,23,42,0.04)]">
               <p class="text-[13.5px] desk:text-[14px] text-slate-600 leading-relaxed">
                 Hi, I’m <span class="font-semibold text-slate-900">Monu Kushwaha</span>. I build lightweight, utility-first web applications, browser extensions, and peer-to-peer tools designed around clean architecture, zero bloat, and fast user workflows.
               </p>
@@ -267,7 +358,7 @@
             </div>
 
             <!-- Core Focus Areas -->
-            <div class="bg-white rounded-2xl border border-[#E2E8F0] p-4 desk:p-5">
+            <div class="bg-white rounded-2xl border border-[#E2E8F0] p-4 desk:p-5 shadow-[0_2px_8px_rgba(15,23,42,0.04)]">
               <h3 class="font-mono text-[11px] font-semibold uppercase tracking-wider text-slate-400 mb-3">
                 Core Focus Areas
               </h3>
@@ -294,7 +385,7 @@
           <!-- Education & Writing (Right 5 cols on desktop) -->
           <div class="desk:col-span-5 space-y-3.5 desk:space-y-4">
             <!-- Education Card -->
-            <div class="bg-white rounded-2xl border border-[#E2E8F0] p-4 desk:p-5">
+            <div class="bg-white rounded-2xl border border-[#E2E8F0] p-4 desk:p-5 shadow-[0_2px_8px_rgba(15,23,42,0.04)]">
               <h3 class="font-mono text-[11px] font-semibold uppercase tracking-wider text-slate-400 mb-3">
                 Education
               </h3>
@@ -311,7 +402,7 @@
             </div>
 
             <!-- Technical Writing -->
-            <div class="bg-white rounded-2xl border border-[#E2E8F0] p-4 desk:p-5">
+            <div class="bg-white rounded-2xl border border-[#E2E8F0] p-4 desk:p-5 shadow-[0_2px_8px_rgba(15,23,42,0.04)]">
               <h3 class="font-mono text-[11px] font-semibold uppercase tracking-wider text-slate-400 mb-3">
                 Technical Writing
               </h3>
@@ -336,22 +427,89 @@
       <!-- ==================== TAB 3: MY SKILLS ==================== -->
       <section id="panel-skills" class="tab-panel hidden animate-panel" aria-labelledby="heading-skills">
         <div>
-          <span class="inline-block font-mono text-[10.5px] font-semibold uppercase tracking-[0.12em] text-slate-600 bg-white border border-[#E2E8F0] px-2.5 py-1 rounded-full">
+          <span class="inline-block font-mono text-[10.5px] font-semibold uppercase tracking-[0.12em] text-slate-600 bg-white border border-[#E2E8F0] px-2.5 py-1 rounded-full shadow-[0_1px_2px_rgba(0,0,0,0.03)]">
             CAPABILITIES
           </span>
           <h2 id="heading-skills" class="mt-3 text-[24px] desk:text-[28px] font-bold tracking-tight text-slate-900 leading-tight">
             My Skills
           </h2>
           <p class="mt-1 text-[13.5px] desk:text-[14.5px] text-slate-500 leading-relaxed">
-            Categorized technologies, protocols, and developer tools
+            Categorized technologies, animated domain proficiencies, and developer tools
           </p>
         </div>
 
         <div class="h-px bg-slate-200/80 my-4 desk:my-5"></div>
 
+        <!-- Animated Domain Progress Bars (Spring Physics) -->
+        <div class="bg-white rounded-2xl border border-[#E2E8F0] p-4 desk:p-5 mb-4 shadow-[0_2px_8px_rgba(15,23,42,0.04)]">
+          <div class="flex items-center justify-between mb-4">
+            <h3 class="font-mono text-[11px] font-semibold uppercase tracking-wider text-slate-400">
+              Core Competency Breakdown
+            </h3>
+            <span class="font-mono text-[11px] text-slate-400">Hands-on Experience</span>
+          </div>
+          
+          <div class="space-y-3.5">
+            <!-- Skill 1 -->
+            <div>
+              <div class="flex justify-between text-[12.5px] font-medium text-slate-700 mb-1">
+                <span>Backend Engineering &amp; REST APIs (Python, Flask, PostgreSQL)</span>
+                <span class="font-mono font-semibold text-slate-900">94%</span>
+              </div>
+              <div class="w-full h-2 rounded-full bg-slate-100 overflow-hidden">
+                <div class="skill-bar-fill h-full rounded-full bg-obsidian-900" data-target="94%" style="width: 0%; transition: width 0.9s cubic-bezier(0.22, 1, 0.36, 1);"></div>
+              </div>
+            </div>
+
+            <!-- Skill 2 -->
+            <div>
+              <div class="flex justify-between text-[12.5px] font-medium text-slate-700 mb-1">
+                <span>Networking &amp; P2P Protocols (WebRTC, CCNA, TCP/IP)</span>
+                <span class="font-mono font-semibold text-slate-900">90%</span>
+              </div>
+              <div class="w-full h-2 rounded-full bg-slate-100 overflow-hidden">
+                <div class="skill-bar-fill h-full rounded-full bg-obsidian-900" data-target="90%" style="width: 0%; transition: width 0.9s cubic-bezier(0.22, 1, 0.36, 1);"></div>
+              </div>
+            </div>
+
+            <!-- Skill 3 -->
+            <div>
+              <div class="flex justify-between text-[12.5px] font-medium text-slate-700 mb-1">
+                <span>Frontend Systems &amp; Extensions (React, Manifest V3, Shadow DOM)</span>
+                <span class="font-mono font-semibold text-slate-900">88%</span>
+              </div>
+              <div class="w-full h-2 rounded-full bg-slate-100 overflow-hidden">
+                <div class="skill-bar-fill h-full rounded-full bg-obsidian-900" data-target="88%" style="width: 0%; transition: width 0.9s cubic-bezier(0.22, 1, 0.36, 1);"></div>
+              </div>
+            </div>
+
+            <!-- Skill 4 -->
+            <div>
+              <div class="flex justify-between text-[12.5px] font-medium text-slate-700 mb-1">
+                <span>AI Engineering &amp; Tool Calling (Gemini API, LLMs)</span>
+                <span class="font-mono font-semibold text-slate-900">86%</span>
+              </div>
+              <div class="w-full h-2 rounded-full bg-slate-100 overflow-hidden">
+                <div class="skill-bar-fill h-full rounded-full bg-obsidian-900" data-target="86%" style="width: 0%; transition: width 0.9s cubic-bezier(0.22, 1, 0.36, 1);"></div>
+              </div>
+            </div>
+
+            <!-- Skill 5 -->
+            <div>
+              <div class="flex justify-between text-[12.5px] font-medium text-slate-700 mb-1">
+                <span>Deployment &amp; Developer Tools (Linux CLI, Git, Render)</span>
+                <span class="font-mono font-semibold text-slate-900">84%</span>
+              </div>
+              <div class="w-full h-2 rounded-full bg-slate-100 overflow-hidden">
+                <div class="skill-bar-fill h-full rounded-full bg-obsidian-900" data-target="84%" style="width: 0%; transition: width 0.9s cubic-bezier(0.22, 1, 0.36, 1);"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <div class="grid grid-cols-1 desk:grid-cols-2 gap-3.5 desk:gap-4">
           <!-- Category 1: Frontend -->
-          <div class="bg-white rounded-2xl border border-[#E2E8F0] p-4 desk:p-5">
+          <div class="bg-white rounded-2xl border border-[#E2E8F0] p-4 desk:p-5 shadow-[0_2px_8px_rgba(15,23,42,0.04)]">
             <div class="flex items-center gap-2 mb-3">
               <i data-lucide="layout" class="w-4 h-4 text-slate-800"></i>
               <h3 class="text-[14px] font-semibold text-slate-900">Frontend &amp; Browser</h3>
@@ -368,7 +526,7 @@
           </div>
 
           <!-- Category 2: Backend & APIs -->
-          <div class="bg-white rounded-2xl border border-[#E2E8F0] p-4 desk:p-5">
+          <div class="bg-white rounded-2xl border border-[#E2E8F0] p-4 desk:p-5 shadow-[0_2px_8px_rgba(15,23,42,0.04)]">
             <div class="flex items-center gap-2 mb-3">
               <i data-lucide="server" class="w-4 h-4 text-slate-800"></i>
               <h3 class="text-[14px] font-semibold text-slate-900">Backend &amp; APIs</h3>
@@ -383,14 +541,14 @@
             </div>
           </div>
 
-          <!-- Category 3: Networking & Tools -->
-          <div class="bg-white rounded-2xl border border-[#E2E8F0] p-4 desk:p-5">
+          <!-- Category 3: Networking & Protocols -->
+          <div class="bg-white rounded-2xl border border-[#E2E8F0] p-4 desk:p-5 shadow-[0_2px_8px_rgba(15,23,42,0.04)]">
             <div class="flex items-center gap-2 mb-3">
               <i data-lucide="network" class="w-4 h-4 text-slate-800"></i>
-              <h3 class="text-[14px] font-semibold text-slate-900">Networking &amp; Tools</h3>
+              <h3 class="text-[14px] font-semibold text-slate-900">Networking &amp; Protocols</h3>
             </div>
             <div class="flex flex-wrap gap-1.5">
-              <span class="px-2.5 py-1 rounded-lg bg-slate-50 border border-slate-200/80 font-mono text-[11.5px] text-slate-700">CCNA Networking</span>
+              <span class="px-2.5 py-1 rounded-lg bg-slate-50 border border-slate-200/80 font-mono text-[11.5px] text-slate-700">CCNA Fundamentals</span>
               <span class="px-2.5 py-1 rounded-lg bg-slate-50 border border-slate-200/80 font-mono text-[11.5px] text-slate-700">WebRTC (P2P)</span>
               <span class="px-2.5 py-1 rounded-lg bg-slate-50 border border-slate-200/80 font-mono text-[11.5px] text-slate-700">TCP/IP &amp; DNS</span>
               <span class="px-2.5 py-1 rounded-lg bg-slate-50 border border-slate-200/80 font-mono text-[11.5px] text-slate-700">Git &amp; GitHub</span>
@@ -399,20 +557,28 @@
             </div>
           </div>
 
-          <!-- Category 4: Currently Exploring -->
-          <div class="bg-white rounded-2xl border border-[#E2E8F0] p-4 desk:p-5">
+          <!-- Category 4: Spoken Languages & Exploring -->
+          <div class="bg-white rounded-2xl border border-[#E2E8F0] p-4 desk:p-5 shadow-[0_2px_8px_rgba(15,23,42,0.04)]">
             <div class="flex items-center justify-between gap-2 mb-3">
               <div class="flex items-center gap-2">
-                <i data-lucide="sparkles" class="w-4 h-4 text-slate-800"></i>
-                <h3 class="text-[14px] font-semibold text-slate-900">Currently Exploring</h3>
+                <i data-lucide="languages" class="w-4 h-4 text-slate-800"></i>
+                <h3 class="text-[14px] font-semibold text-slate-900">Languages &amp; Exploring</h3>
               </div>
               <span class="font-mono text-[10.5px] px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200/80">Active</span>
             </div>
+            
+            <p class="font-mono text-[11px] text-slate-400 uppercase tracking-wider mb-2">Spoken Languages</p>
+            <div class="flex flex-wrap gap-1.5 mb-3.5">
+              <span class="px-2.5 py-1 rounded-lg bg-slate-50 border border-slate-200/80 font-mono text-[11.5px] text-slate-700">Hindi (Native)</span>
+              <span class="px-2.5 py-1 rounded-lg bg-slate-50 border border-slate-200/80 font-mono text-[11.5px] text-slate-700">English (Fluent)</span>
+              <span class="px-2.5 py-1 rounded-lg bg-slate-50 border border-slate-200/80 font-mono text-[11.5px] text-slate-700">German (Beginner)</span>
+            </div>
+
+            <p class="font-mono text-[11px] text-slate-400 uppercase tracking-wider mb-2">Exploring</p>
             <div class="flex flex-wrap gap-1.5">
               <span class="px-2.5 py-1 rounded-lg bg-slate-50 border border-slate-200/80 font-mono text-[11.5px] text-slate-700">Django</span>
               <span class="px-2.5 py-1 rounded-lg bg-slate-50 border border-slate-200/80 font-mono text-[11.5px] text-slate-700">Machine Learning</span>
               <span class="px-2.5 py-1 rounded-lg bg-slate-50 border border-slate-200/80 font-mono text-[11.5px] text-slate-700">Network Security</span>
-              <span class="px-2.5 py-1 rounded-lg bg-slate-50 border border-slate-200/80 font-mono text-[11.5px] text-slate-700">LLM Tool Calling</span>
             </div>
           </div>
         </div>
@@ -421,7 +587,7 @@
       <!-- ==================== TAB 4: CONTACT ==================== -->
       <section id="panel-contact" class="tab-panel hidden animate-panel" aria-labelledby="heading-contact">
         <div>
-          <span class="inline-block font-mono text-[10.5px] font-semibold uppercase tracking-[0.12em] text-slate-600 bg-white border border-[#E2E8F0] px-2.5 py-1 rounded-full">
+          <span class="inline-block font-mono text-[10.5px] font-semibold uppercase tracking-[0.12em] text-slate-600 bg-white border border-[#E2E8F0] px-2.5 py-1 rounded-full shadow-[0_1px_2px_rgba(0,0,0,0.03)]">
             GET IN TOUCH
           </span>
           <h2 id="heading-contact" class="mt-3 text-[24px] desk:text-[28px] font-bold tracking-tight text-slate-900 leading-tight">
@@ -438,7 +604,7 @@
           <!-- Direct Email & Social Cards (Left 5 cols on desktop) -->
           <div class="desk:col-span-5 space-y-3">
             <!-- One-Click Copy Email Card -->
-            <div class="bg-white rounded-2xl border border-[#E2E8F0] p-4 flex items-center justify-between gap-2">
+            <div class="bg-white rounded-2xl border border-[#E2E8F0] p-4 flex items-center justify-between gap-2 shadow-[0_2px_8px_rgba(15,23,42,0.04)]">
               <div class="min-w-0">
                 <span class="block font-mono text-[10.5px] uppercase tracking-wider text-slate-400">Direct Email</span>
                 <span id="email-text" class="block text-[13.5px] font-semibold text-slate-900 truncate mt-0.5">monubhaibhiraj@gmail.com</span>
@@ -456,21 +622,21 @@
 
             <!-- Social Profile Cards -->
             <div class="grid grid-cols-1 gap-2.5">
-              <a href="https://github.com/Monukushwaha9026" target="_blank" rel="noopener noreferrer" class="min-h-[50px] px-4 rounded-2xl bg-white border border-[#E2E8F0] hover:border-slate-300 flex items-center justify-between text-[13.5px] font-medium text-slate-800 transition-colors">
+              <a href="https://github.com/Monukushwaha9026" target="_blank" rel="noopener noreferrer" class="min-h-[50px] px-4 rounded-2xl bg-white border border-[#E2E8F0] hover:border-slate-300 flex items-center justify-between text-[13.5px] font-medium text-slate-800 transition-colors shadow-[0_2px_8px_rgba(15,23,42,0.04)]">
                 <span class="inline-flex items-center gap-2.5">
                   <i data-lucide="github" class="w-4 h-4 text-slate-700"></i>
                   <span>github.com/Monukushwaha9026</span>
                 </span>
                 <i data-lucide="arrow-up-right" class="w-4 h-4 text-slate-400"></i>
               </a>
-              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="min-h-[50px] px-4 rounded-2xl bg-white border border-[#E2E8F0] hover:border-slate-300 flex items-center justify-between text-[13.5px] font-medium text-slate-800 transition-colors">
+              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="min-h-[50px] px-4 rounded-2xl bg-white border border-[#E2E8F0] hover:border-slate-300 flex items-center justify-between text-[13.5px] font-medium text-slate-800 transition-colors shadow-[0_2px_8px_rgba(15,23,42,0.04)]">
                 <span class="inline-flex items-center gap-2.5">
                   <i data-lucide="linkedin" class="w-4 h-4 text-slate-700"></i>
                   <span>LinkedIn Profile</span>
                 </span>
                 <i data-lucide="arrow-up-right" class="w-4 h-4 text-slate-400"></i>
               </a>
-              <a href="https://neuralcorecode.blogspot.com" target="_blank" rel="noopener noreferrer" class="min-h-[50px] px-4 rounded-2xl bg-white border border-[#E2E8F0] hover:border-slate-300 flex items-center justify-between text-[13.5px] font-medium text-slate-800 transition-colors">
+              <a href="https://neuralcorecode.blogspot.com" target="_blank" rel="noopener noreferrer" class="min-h-[50px] px-4 rounded-2xl bg-white border border-[#E2E8F0] hover:border-slate-300 flex items-center justify-between text-[13.5px] font-medium text-slate-800 transition-colors shadow-[0_2px_8px_rgba(15,23,42,0.04)]">
                 <span class="inline-flex items-center gap-2.5">
                   <i data-lucide="book-open" class="w-4 h-4 text-slate-700"></i>
                   <span>NeuralCoreCode Blog</span>
@@ -481,7 +647,7 @@
           </div>
 
           <!-- Quick Message Form (Right 7 cols on desktop) -->
-          <form id="contact-form" onsubmit="handleContactSubmit(event)" class="desk:col-span-7 bg-white rounded-2xl border border-[#E2E8F0] p-4 desk:p-5 space-y-3">
+          <form id="contact-form" onsubmit="handleContactSubmit(event)" class="desk:col-span-7 bg-white rounded-2xl border border-[#E2E8F0] p-4 desk:p-5 space-y-3 shadow-[0_2px_8px_rgba(15,23,42,0.04)]">
             <h3 class="text-[14px] font-semibold text-slate-900">Send a quick note</h3>
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <div>
@@ -528,10 +694,18 @@
 
     </main>
 
-    <!-- Responsive Project Detail Modal: Bottom Sheet on Mobile (<960px) | Centered Dialog on Desktop (>=960px) -->
+    <!-- ==================== RESPONSIVE DETAIL MODAL / BOTTOM SHEET ==================== -->
     <div id="project-drawer-backdrop" onclick="closeProjectDrawer()" class="fixed inset-0 bg-obsidian-950/55 backdrop-blur-[2px] z-40 hidden opacity-0 transition-opacity duration-200"></div>
-    <div id="project-drawer" role="dialog" aria-modal="true" aria-labelledby="drawer-title" class="fixed inset-x-0 bottom-0 desk:inset-auto desk:top-1/2 desk:left-1/2 desk:-translate-x-1/2 desk:-translate-y-1/2 desk:w-full desk:max-w-[560px] z-50 bg-white rounded-t-3xl desk:rounded-3xl border-t desk:border border-[#E2E8F0] p-5 desk:p-6 pb-7 shadow-2xl transform translate-y-full desk:translate-y-[-46%] desk:opacity-0 desk:pointer-events-none transition-all duration-250 ease-out max-h-[85vh] overflow-y-auto">
-      <div class="w-10 h-1 rounded-full bg-slate-200 mx-auto mb-4 desk:hidden"></div>
+    <div
+      id="project-drawer"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="drawer-title"
+      class="fixed inset-x-0 bottom-0 desk:inset-auto desk:top-1/2 desk:left-1/2 desk:-translate-x-1/2 desk:-translate-y-1/2 desk:w-full desk:max-w-[560px] z-50 bg-white rounded-t-3xl desk:rounded-3xl border-t desk:border border-[#E2E8F0] p-5 desk:p-6 pb-7 shadow-2xl transform translate-y-full desk:translate-y-[-46%] desk:opacity-0 desk:pointer-events-none transition-all duration-250 ease-out max-h-[85vh] overflow-y-auto"
+    >
+      <!-- Swipe-to-dismiss Touch Handle for Mobile -->
+      <div id="drawer-touch-handle" class="w-12 h-1.5 rounded-full bg-slate-300 mx-auto mb-3 cursor-grab desk:hidden"></div>
+      
       <div class="flex items-start justify-between gap-3">
         <div>
           <span id="drawer-badge" class="inline-block px-2.5 py-0.5 rounded-full text-[11px] font-medium bg-slate-100 text-slate-700 border border-slate-200/80">
@@ -584,7 +758,7 @@
   </div>
 
   <script>
-    // Monu Kushwaha's 6 Real Projects
+    // Monu Kushwaha's 7 Real Projects
     const PROJECTS = [
       {
         id: 'selectx',
@@ -595,13 +769,30 @@
         shortDesc: 'Lightweight modern Chrome extension that lets you select any text on any webpage to instantly view dictionary definitions, pronunciation audio, and multilingual translations in a floating glassmorphic popup.',
         fullDesc: 'Lightweight modern Chrome extension that lets you select any text on any webpage to instantly view dictionary definitions, pronunciation audio, and multilingual translations in a floating glassmorphic popup. Features auto word/sentence mode switching, continuous reading mode, text-to-speech, keyboard shortcut Alt+Shift+T, and local lookup history isolated in Shadow DOM.',
         highlights: [
-          'Floating glassmorphic popup completely isolated in Shadow DOM',
+          'Floating glassmorphic popup completely isolated in Shadow DOM for zero style leaks',
           'Auto word/sentence mode switching & continuous reading mode',
           'Instant text-to-speech audio, Alt+Shift+T shortcut & local lookup history'
         ],
         tech: ['JavaScript', 'Manifest V3', 'Shadow DOM', 'Web Speech API'],
         githubUrl: 'https://github.com/Monukushwaha9026/SelectX',
         liveUrl: 'https://github.com/Monukushwaha9026/SelectX'
+      },
+      {
+        id: 'colorbook',
+        title: 'ColorBook AI — Coloring Book Generator',
+        badge: 'Live on Render',
+        categories: ['ai', 'webapp'],
+        monoSubtitle: 'AI-Powered Creative Web Application',
+        shortDesc: 'Turn your ideas into printable coloring books. An AI-powered web app that generates unique coloring pages using Gemini API and exports ready-to-print PDFs.',
+        fullDesc: 'Turn your ideas into printable coloring books. An AI-powered web app that generates unique high-contrast line art coloring pages using Gemini AI, with custom prompts, category presets, and one-click multi-page PDF generation.',
+        highlights: [
+          'Generates clean line-art coloring pages powered by Gemini AI API',
+          'Automated multi-page PDF layout generation via Python ReportLab',
+          'Live deployed on Render cloud with responsive preview canvas'
+        ],
+        tech: ['Python', 'Flask', 'Gemini API', 'ReportLab', 'Render'],
+        githubUrl: 'https://github.com/Monukushwaha9026/ColorBook',
+        liveUrl: 'https://colorbook-ai.onrender.com/'
       },
       {
         id: 'peerdrop',
@@ -692,77 +883,99 @@
 
     let activeCategory = 'all';
 
-    // Render Project Cards
+    // Liquid Sliding Nav Pill Indicator Updater
+    function updateNavPill(tabName) {
+      const activeBtn = document.querySelector(`.nav-tab[data-tab="${tabName}"]`);
+      const indicator = document.getElementById('nav-pill-indicator');
+      if (!activeBtn || !indicator) return;
+
+      const x = activeBtn.offsetLeft;
+      const y = activeBtn.offsetTop;
+      const w = activeBtn.offsetWidth;
+      const h = activeBtn.offsetHeight;
+
+      indicator.style.transform = `translate3d(${x}px, ${y}px, 0)`;
+      indicator.style.width = `${w}px`;
+      indicator.style.height = `${h}px`;
+      indicator.style.opacity = '1';
+    }
+
+    // Render Project Cards with Staggered Entrance & 3D Tilt
     function renderProjects(filter = 'all') {
       const container = document.getElementById('projects-list');
       const filtered = filter === 'all'
         ? PROJECTS
         : PROJECTS.filter(p => p.categories.includes(filter));
 
-      container.innerHTML = filtered.map(project => `
-        <article class="group bg-white rounded-2xl border border-[#E2E8F0] hover:border-slate-300 p-4 desk:p-5 shadow-[0_1px_3px_rgba(15,23,42,0.03)] hover:shadow-[0_12px_28px_-10px_rgba(15,23,42,0.08)] desk:hover:-translate-y-0.5 transition-all duration-200 flex flex-col justify-between">
-          <div>
-            <!-- Top Row: Title + Category Pill -->
-            <div class="flex items-start justify-between gap-3">
-              <h3 class="text-[16px] desk:text-[17px] font-bold text-slate-900 leading-snug tracking-tight">
-                ${project.title}
-              </h3>
-              <span class="shrink-0 px-2.5 py-1 rounded-full text-[11px] font-medium bg-slate-100/90 text-slate-700 border border-slate-200/70">
-                ${project.badge}
-              </span>
-            </div>
+      container.innerHTML = filtered.map((project, index) => `
+        <article class="project-card card-stagger group flex flex-col justify-between" style="animation-delay: ${index * 45}ms;">
+          <div class="project-card-inner relative overflow-hidden bg-white rounded-2xl border border-[#E2E8F0] hover:border-slate-300 p-4 desk:p-5 shadow-[0_2px_8px_rgba(15,23,42,0.04)] hover:shadow-[0_16px_32px_-10px_rgba(15,23,42,0.08)] flex-1 flex flex-col justify-between">
+            <!-- 3D Cursor Radial Spotlight Overlay -->
+            <div class="card-spotlight pointer-events-none absolute inset-0 rounded-2xl opacity-0 transition-opacity duration-300 z-0" aria-hidden="true"></div>
 
-            <!-- Monospace Subtitle -->
-            <p class="mt-1 font-mono text-[11.5px] text-slate-500">
-              ${project.monoSubtitle}
-            </p>
-
-            <!-- Concise Summary -->
-            <p class="mt-2.5 text-[13.5px] text-slate-600 leading-relaxed line-clamp-3">
-              ${project.shortDesc}
-            </p>
-          </div>
-
-          <div class="mt-3.5">
-            <!-- Tech Micro-Tags -->
-            <div class="flex flex-wrap gap-1.5">
-              ${project.tech.map(t => `
-                <span class="px-2 py-0.5 rounded-md bg-slate-50 border border-slate-200/70 font-mono text-[10.5px] text-slate-600">
-                  ${t}
+            <div class="relative z-10">
+              <!-- Top Row: Title + Category Pill -->
+              <div class="flex items-start justify-between gap-3">
+                <h3 class="text-[16px] desk:text-[17px] font-bold text-slate-900 leading-snug tracking-tight">
+                  ${project.title}
+                </h3>
+                <span class="shrink-0 px-2.5 py-1 rounded-full text-[11px] font-medium bg-slate-100/90 text-slate-700 border border-slate-200/70">
+                  ${project.badge}
                 </span>
-              `).join('')}
+              </div>
+
+              <!-- Monospace Subtitle -->
+              <p class="mt-1 font-mono text-[11.5px] text-slate-500">
+                ${project.monoSubtitle}
+              </p>
+
+              <!-- Concise Summary -->
+              <p class="mt-2.5 text-[13.5px] text-slate-600 leading-relaxed line-clamp-3">
+                ${project.shortDesc}
+              </p>
             </div>
 
-            <!-- Bottom Action Row (Accessible touch targets) -->
-            <div class="mt-3.5 pt-3 border-t border-slate-100 flex items-center justify-between gap-2">
-              <button
-                type="button"
-                onclick="openProjectDrawer('${project.id}')"
-                class="min-h-[38px] px-2.5 -ml-2.5 rounded-lg text-[12.5px] font-medium text-slate-700 hover:text-slate-950 hover:bg-slate-100/80 inline-flex items-center gap-1 transition-colors"
-              >
-                <span>Details</span>
-                <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>
-              </button>
+            <div class="relative z-10 mt-3.5">
+              <!-- Tech Micro-Tags -->
+              <div class="flex flex-wrap gap-1.5">
+                ${project.tech.map(t => `
+                  <span class="px-2 py-0.5 rounded-md bg-slate-50 border border-slate-200/70 font-mono text-[10.5px] text-slate-600">
+                    ${t}
+                  </span>
+                `).join('')}
+              </div>
 
-              <div class="flex items-center gap-1.5">
-                <a
-                  href="${project.githubUrl}"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="GitHub source for ${project.title}"
-                  class="min-w-[38px] min-h-[38px] rounded-xl border border-[#E2E8F0] hover:border-slate-300 hover:bg-slate-50 text-slate-700 inline-flex items-center justify-center transition-colors"
+              <!-- Bottom Action Row -->
+              <div class="mt-3.5 pt-3 border-t border-slate-100 flex items-center justify-between gap-2">
+                <button
+                  type="button"
+                  onclick="openProjectDrawer('${project.id}')"
+                  class="min-h-[38px] px-2.5 -ml-2.5 rounded-lg text-[12.5px] font-medium text-slate-700 hover:text-slate-950 hover:bg-slate-100/80 inline-flex items-center gap-1 transition-colors"
                 >
-                  <i data-lucide="github" class="w-4 h-4"></i>
-                </a>
-                <a
-                  href="${project.liveUrl}"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="min-h-[38px] px-3 rounded-xl bg-obsidian-900 hover:bg-obsidian-800 text-white text-[12px] font-medium inline-flex items-center gap-1 transition-colors"
-                >
-                  <span>Live</span>
-                  <i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i>
-                </a>
+                  <span>Details</span>
+                  <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>
+                </button>
+
+                <div class="flex items-center gap-1.5">
+                  <a
+                    href="${project.githubUrl}"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="GitHub source for ${project.title}"
+                    class="min-w-[38px] min-h-[38px] rounded-xl border border-[#E2E8F0] hover:border-slate-300 hover:bg-slate-50 text-slate-700 inline-flex items-center justify-center transition-colors"
+                  >
+                    <i data-lucide="github" class="w-4 h-4"></i>
+                  </a>
+                  <a
+                    href="${project.liveUrl}"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="min-h-[38px] px-3 rounded-xl bg-obsidian-900 hover:bg-obsidian-800 text-white text-[12px] font-medium inline-flex items-center gap-1 transition-colors shadow-sm"
+                  >
+                    <span>Live</span>
+                    <i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i>
+                  </a>
+                </div>
               </div>
             </div>
           </div>
@@ -770,33 +983,69 @@
       `).join('');
 
       lucide.createIcons();
+      attachCardTiltAndSpotlight();
     }
 
-    // Navigation Tab Switching (Works identically on Mobile Top Bar & Desktop Sidebar)
+    // Attach 3D Card Tilt & Cursor Spotlight on Desktop
+    function attachCardTiltAndSpotlight() {
+      if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+
+      document.querySelectorAll('.project-card').forEach(card => {
+        const inner = card.querySelector('.project-card-inner');
+        const spotlight = card.querySelector('.card-spotlight');
+        if (!inner || !spotlight) return;
+
+        card.addEventListener('mousemove', (e) => {
+          const rect = card.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+          const centerX = rect.width / 2;
+          const centerY = rect.height / 2;
+
+          const rotateX = ((y - centerY) / centerY) * -2.8;
+          const rotateY = ((x - centerX) / centerX) * 2.8;
+
+          inner.style.transform = `rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) translateY(-2px)`;
+          spotlight.style.background = `radial-gradient(360px circle at ${x}px ${y}px, rgba(59, 130, 246, 0.08), transparent 70%)`;
+          spotlight.style.opacity = '1';
+        });
+
+        card.addEventListener('mouseleave', () => {
+          inner.style.transform = 'rotateX(0deg) rotateY(0deg) translateY(0)';
+          spotlight.style.opacity = '0';
+        });
+      });
+    }
+
+    // Animate Skill Progress Bars
+    function triggerSkillBarsAnimation() {
+      document.querySelectorAll('.skill-bar-fill').forEach(bar => {
+        bar.style.width = '0%';
+        setTimeout(() => {
+          bar.style.width = bar.dataset.target || '80%';
+        }, 60);
+      });
+    }
+
+    // Navigation Tab Switching with Liquid Sliding Pill
     function switchTab(tabName) {
       document.querySelectorAll('.nav-tab').forEach(btn => {
         const isTarget = btn.dataset.tab === tabName;
-        const isProjectsTab = btn.dataset.tab === 'projects';
         btn.setAttribute('aria-selected', isTarget ? 'true' : 'false');
 
         if (isTarget) {
-          btn.className = `nav-tab min-h-[40px] desk:min-h-[44px] px-3.5 desk:px-4 py-2 rounded-full desk:rounded-2xl text-[13px] desk:text-[13.5px] font-semibold inline-flex items-center ${isProjectsTab ? 'justify-between' : 'justify-start'} gap-2 whitespace-nowrap transition-all duration-150 bg-white text-obsidian-900 shadow-sm active:scale-[0.98]`;
-          if (window.innerWidth < 960) {
-            btn.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
-          }
+          btn.classList.remove('text-slate-400', 'hover:text-white', 'desk:hover:bg-white/[0.04]', 'font-medium');
+          btn.classList.add('text-obsidian-900', 'font-semibold');
         } else {
-          btn.className = `nav-tab min-h-[40px] desk:min-h-[44px] px-3.5 desk:px-4 py-2 rounded-full desk:rounded-2xl text-[13px] desk:text-[13.5px] font-medium inline-flex items-center ${isProjectsTab ? 'justify-between' : 'justify-start'} gap-2 desk:gap-3 whitespace-nowrap transition-all duration-150 text-slate-400 hover:text-white desk:hover:bg-white/[0.05] active:scale-[0.98]`;
+          btn.classList.remove('text-obsidian-900', 'font-semibold');
+          btn.classList.add('text-slate-400', 'hover:text-white', 'desk:hover:bg-white/[0.04]', 'font-medium');
         }
       });
 
-      // Update Projects Badge styling based on whether Projects tab is active
-      const badge = document.querySelector('.tab-badge');
-      if (badge) {
-        badge.className = tabName === 'projects'
-          ? 'tab-badge inline-flex items-center justify-center min-w-[20px] h-5 px-1.5 rounded-full text-[11px] font-mono font-semibold bg-obsidian-900 text-white'
-          : 'tab-badge inline-flex items-center justify-center min-w-[20px] h-5 px-1.5 rounded-full text-[11px] font-mono font-semibold bg-white/15 text-slate-200';
-      }
+      // Update pill indicator position smoothly
+      updateNavPill(tabName);
 
+      // Tab Panel Visibility
       document.querySelectorAll('.tab-panel').forEach(panel => {
         panel.classList.add('hidden');
       });
@@ -805,25 +1054,41 @@
         activePanel.classList.remove('hidden');
       }
 
+      // If switching to Skills tab, trigger spring bar animation
+      if (tabName === 'skills') {
+        triggerSkillBarsAnimation();
+      }
+
+      // Scroll active mobile button into view smoothly
       if (window.innerWidth < 960) {
+        const activeBtn = document.querySelector(`.nav-tab[data-tab="${tabName}"]`);
+        if (activeBtn) {
+          activeBtn.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+        }
         window.scrollTo({ top: 0, behavior: 'smooth' });
       }
     }
 
-    // Bind Tab Clicks
+    // Bind Tab Click Listeners
     document.querySelectorAll('.nav-tab').forEach(btn => {
       btn.addEventListener('click', () => switchTab(btn.dataset.tab));
     });
 
-    // Bind Category Filter Clicks
+    // Handle Window Resize for Nav Pill Position
+    window.addEventListener('resize', () => {
+      const activeBtn = document.querySelector('.nav-tab[aria-selected="true"]');
+      if (activeBtn) updateNavPill(activeBtn.dataset.tab);
+    });
+
+    // Bind Category Filter Clicks with Staggered Entrance
     document.querySelectorAll('.filter-pill').forEach(pill => {
       pill.addEventListener('click', () => {
         activeCategory = pill.dataset.filter;
         document.querySelectorAll('.filter-pill').forEach(p => {
           const active = p.dataset.filter === activeCategory;
           p.className = active
-            ? 'filter-pill min-h-[36px] px-3.5 rounded-full text-[12px] desk:text-[12.5px] font-medium bg-obsidian-900 text-white transition-colors whitespace-nowrap'
-            : 'filter-pill min-h-[36px] px-3.5 rounded-full text-[12px] desk:text-[12.5px] font-medium bg-white text-slate-600 border border-[#E2E8F0] hover:border-slate-300 transition-colors whitespace-nowrap';
+            ? 'filter-pill min-h-[36px] px-3.5 rounded-full text-[12px] desk:text-[12.5px] font-medium bg-obsidian-900 text-white shadow-sm transition-all duration-150 whitespace-nowrap active:scale-[0.98]'
+            : 'filter-pill min-h-[36px] px-3.5 rounded-full text-[12px] desk:text-[12.5px] font-medium bg-white text-slate-600 border border-slate-200 hover:border-slate-300 shadow-sm transition-all duration-150 whitespace-nowrap active:scale-[0.98]';
         });
         renderProjects(activeCategory);
       });
@@ -860,6 +1125,7 @@
       requestAnimationFrame(() => {
         backdrop.classList.remove('opacity-0');
         drawer.classList.remove('translate-y-full', 'desk:translate-y-[-46%]', 'desk:opacity-0', 'desk:pointer-events-none');
+        drawer.style.transform = '';
       });
     }
 
@@ -872,12 +1138,49 @@
 
       setTimeout(() => {
         backdrop.classList.add('hidden');
+        drawer.style.transform = '';
       }, 220);
     }
 
     // Close modal on Escape key
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') closeProjectDrawer();
+    });
+
+    // Touch Swipe-to-Dismiss Mobile Bottom Sheet Gesture
+    let touchStartY = 0;
+    let touchCurrentY = 0;
+    let isDraggingDrawer = false;
+    const drawerEl = document.getElementById('project-drawer');
+
+    drawerEl.addEventListener('touchstart', (e) => {
+      if (window.innerWidth >= 960) return;
+      if (drawerEl.scrollTop > 5) return; // Only allow drag-down when scrolled to top
+      touchStartY = e.touches[0].clientY;
+      touchCurrentY = touchStartY;
+      isDraggingDrawer = true;
+      drawerEl.style.transition = 'none';
+    }, { passive: true });
+
+    drawerEl.addEventListener('touchmove', (e) => {
+      if (!isDraggingDrawer) return;
+      touchCurrentY = e.touches[0].clientY;
+      const deltaY = touchCurrentY - touchStartY;
+      if (deltaY > 0) {
+        drawerEl.style.transform = `translateY(${deltaY}px)`;
+      }
+    }, { passive: true });
+
+    drawerEl.addEventListener('touchend', () => {
+      if (!isDraggingDrawer) return;
+      isDraggingDrawer = false;
+      drawerEl.style.transition = 'transform 0.28s cubic-bezier(0.22, 1, 0.36, 1)';
+      const deltaY = touchCurrentY - touchStartY;
+      if (deltaY > 90) {
+        closeProjectDrawer();
+      } else {
+        drawerEl.style.transform = 'translateY(0)';
+      }
     });
 
     // Copy Email using execCommand fallback for iFrame safety
@@ -924,10 +1227,14 @@
       }, 2400);
     }
 
-    // Initial Render
+    // Initial Render & Setup
     window.addEventListener('DOMContentLoaded', () => {
       renderProjects('all');
       lucide.createIcons();
+      // Position liquid pill indicator on active Projects tab
+      setTimeout(() => {
+        updateNavPill('projects');
+      }, 50);
     });
   </script>
 </body>
